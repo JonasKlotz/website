@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const { project } = Astro.props;
+const { title, summary, image, link, repo, year } = project.data;
+---
+<article class="pub-entry reveal">
+
+  <!-- Col 1: Year badge -->
+  <div class="pub-venue-col">
+    <span class="conf-badge">{year}</span>
+  </div>
+
+  <!-- Col 2: Image or placeholder -->
+  <div class="pub-figure-col">
+    {image ? (
+      <img src={image} alt={title} class="pub-figure" loading="lazy" />
+    ) : (
+      <div class="pub-figure-placeholder">
+        <div class="stripe-block" aria-hidden="true" />
+        <span class="placeholder-label">{title.charAt(0)}</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Col 3: Vertical divider -->
+  <div class="pub-divider" aria-hidden="true" />
+
+  <!-- Col 4: Content -->
+  <div class="pub-content">
+    <h3 class="pub-title">{title}</h3>
+    <p class="pub-abstract">{summary}</p>
+    <div class="pub-links">
+      <a href={link} target="_blank" rel="noopener" class="link-btn no-anim">Visit</a>
+      {repo && (
+        <a href={repo} target="_blank" rel="noopener" class="link-btn no-anim">Code</a>
+      )}
+    </div>
+  </div>
+
+</article>

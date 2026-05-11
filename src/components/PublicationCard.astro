@@ -1,0 +1,85 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  publication: CollectionEntry<'publications'>;
+}
+const { publication } = Astro.props;
+const { title, authors, venue, year, arxiv, venueUrl, code, bibtex, abstract, image } = publication.data;
+
+const hasSharedFirst = authors.some(a => a.includes('†'));
+
+const formatAuthors = (list: string[]) =>
+  list
+    .map((a) => {
+      const clean = a.replace('†', '');
+      const marked = a.includes('†') ? `${clean}<sup style="font-size:0.65em">†</sup>` : clean;
+      return clean.toLowerCase().includes('jonas klotz') ? `<strong>${marked}</strong>` : marked;
+    })
+    .join(', ');
+
+const id = `bib-${publication.slug}`;
+const venueShort = venue.split(/[\s–—]+/).filter(Boolean).at(-1) ?? venue;
+---
+<article class="pub-entry reveal">
+
+  <!-- Col 1: Venue badge + year -->
+  <div class="pub-venue-col">
+    <span class="conf-badge">{venueShort}</span>
+    <span class="pub-year">{year}</span>
+  </div>
+
+  <!-- Col 2: Figure or placeholder -->
+  <div class="pub-figure-col">
+    {image ? (
+      <img src={image} alt={`Figure for "${title}"`} class="pub-figure" loading="lazy" />
+    ) : (
+      <div class="pub-figure-placeholder">
+        <div class="stripe-block" aria-hidden="true" />
+        <span class="placeholder-label">{venueShort}</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Col 3: Vertical divider -->
+  <div class="pub-divider" aria-hidden="true" />
+
+  <!-- Col 4: Content -->
+  <div class="pub-content">
+    <h3 class="pub-title">{title}</h3>
+    <p class="pub-authors" set:html={formatAuthors(authors)} />
+    {hasSharedFirst && (
+      <p class="pub-shared-first"><sup>†</sup> Equal contribution</p>
+    )}
+    <p class="pub-venue">{venue} · {year}</p>
+
+    {abstract && (
+      <p class="pub-abstract">{abstract}</p>
+    )}
+
+    <div class="pub-links">
+      {arxiv && (
+        <a href={arxiv} target="_blank" rel="noopener" class="link-btn no-anim">arXiv</a>
+      )}
+      {venueUrl && (
+        <a href={venueUrl} target="_blank" rel="noopener" class="link-btn no-anim">Paper</a>
+      )}
+      {code && (
+        <a href={code} target="_blank" rel="noopener" class="link-btn no-anim">Code</a>
+      )}
+      {bibtex && (
+        <>
+          <button
+            class="link-btn no-anim"
+            style="cursor:pointer;background:transparent;border-width:1.5px"
+            onclick={`var el=document.getElementById('${id}');el.hidden=!el.hidden`}
+          >
+            BibTeX
+          </button>
+          <pre id={id} class="bibtex-block w-full" hidden>{bibtex}</pre>
+        </>
+      )}
+    </div>
+  </div>
+
+</article>

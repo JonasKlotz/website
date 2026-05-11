@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Variables ───────────────────────────────────────────────── */
+:root {
+  --amber: 202, 138, 4;
+  --primary: rgb(var(--amber));
+  --primary-bg: rgba(var(--amber), 0.12);
+  --ink: #111110;
+  --ink-muted: #52524e;
+  --ink-faint: #8f8f8a;
+  --surface: #f9f9f7;
+  --line: #e8e8e4;
+  --line-strong: #d4d4cf;
+  --font-display: 'Crimson Text', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Base ────────────────────────────────────────────────────── */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Underline animation for links */
+  a:not(.no-anim) {
+    position: relative;
+  }
+  a:not(.no-anim)::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background: var(--primary);
+    transform-origin: 100%;
+    transform: scaleX(0);
+    transition: transform 0.28s ease;
+    pointer-events: none;
+  }
+  a:not(.no-anim):hover::after {
+    transform-origin: 0;
+    transform: scaleX(1);
+  }
+}
+
+/* ─── Grain overlay ───────────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─── Scroll reveal ───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* staggered children */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+.reveal-stagger.visible > *:nth-child(1) { opacity:1; transform:translateY(0); transition-delay: 0ms; }
+.reveal-stagger.visible > *:nth-child(2) { opacity:1; transform:translateY(0); transition-delay: 60ms; }
+.reveal-stagger.visible > *:nth-child(3) { opacity:1; transform:translateY(0); transition-delay: 120ms; }
+.reveal-stagger.visible > *:nth-child(4) { opacity:1; transform:translateY(0); transition-delay: 180ms; }
+
+/* ─── Embers canvas ───────────────────────────────────────────── */
+.embers-shell {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  display: none;
+}
+@media (min-width: 1100px) { .embers-shell { display: block; } }
+
+.embers-canvas {
+  position: absolute;
+  top: 0;
+  width: clamp(120px, 18vw, 320px);
+  height: 100%;
+}
+.embers-canvas--left {
+  left: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to right, #000 0%, #000 58%, transparent 100%);
+}
+.embers-canvas--right {
+  right: 0;
+  -webkit-mask-image: linear-gradient(to left, #000 0%, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to left, #000 0%, #000 58%, transparent 100%);
+}
+
+/* ─── Site nav ────────────────────────────────────────────────── */
+.site-nav {
+  background: rgba(249, 249, 247, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ─── Section divider ─────────────────────────────────────────── */
+.section-divider {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  background: var(--line);
+  height: 1px;
+  width: 100vw;
+}
+.section-divider::before { right: 100%; }
+.section-divider::after  { left: 100%;  }
+
+/* ─── Stripe block ────────────────────────────────────────────── */
+.stripe-block {
+  color: var(--line-strong);
+  background-image: repeating-linear-gradient(
+    315deg,
+    currentColor 0,
+    currentColor 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+  background-attachment: fixed;
+}
+
+/* ─── Conference badge ────────────────────────────────────────── */
+.conf-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--primary-bg);
+  color: var(--primary);
+  padding: 3px 7px;
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+/* ─── Publication card (4-col: venue | figure | divider | content) ─── */
+.pub-entry {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  padding: 2rem 0;
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: none;
+  align-items: start;
+}
+/* Remove top border on first entry (section already has a divider above) */
+.pub-entry:first-child {
+  border-top: none;
+}
+/* Full-bleed bottom border on last entry */
+.pub-entry:last-child::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  width: 200vw;
+  height: 1px;
+  background: var(--line);
+}
+
+/* Desktop 4-col layout */
+@media (min-width: 1024px) {
+  .pub-entry {
+    grid-template-columns: 5.5rem minmax(0, 2fr) 2.5rem minmax(0, 2fr);
+    gap: 0;
+    padding: 2.5rem 0;
+  }
+  /* Full-bleed top borders on all but first */
+  .pub-entry:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100vw;
+    width: 200vw;
+    height: 1px;
+    background: var(--line);
+  }
+  .pub-entry { border-top: none; }
+}
+
+/* Tablet: 3-col (venue | divider | content), hide figure */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .pub-entry {
+    grid-template-columns: 5.5rem 2.5rem 1fr;
+    gap: 0;
+    padding: 2rem 0;
+  }
+  .pub-figure-col { display: none; }
+}
+
+/* Venue column */
+.pub-venue-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding-top: 0.25rem;
+}
+
+/* Figure column */
+.pub-figure-col {
+  padding-top: 0.25rem;
+  padding-right: 0;
+}
+
+.pub-year {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+}
+
+.pub-figure {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+.pub-figure-placeholder {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+}
+.pub-figure-placeholder .stripe-block {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+.pub-figure-placeholder .placeholder-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+  opacity: 0.45;
+}
+
+/* divider column */
+.pub-divider {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .pub-divider {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.25rem;
+  }
+  .pub-divider::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: var(--line);
+  }
+}
+
+/* content column */
+.pub-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+@media (min-width: 1024px) {
+  .pub-content { padding-left: 2rem; }
+}
+
+.pub-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+.pub-authors {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+}
+.pub-authors strong { color: var(--ink); font-weight: 600; }
+
+.pub-shared-first {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  margin-top: -0.15rem;
+}
+
+.pub-venue {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.pub-abstract {
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  color: var(--ink-muted);
+  line-height: 1.75;
+  margin-top: 0.25rem;
+}
+
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ─── Link buttons ────────────────────────────────────────────── */
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  border: 1.5px solid rgba(var(--amber), 0.4);
+  border-radius: 0;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.link-btn::after { display: none !important; } /* suppress global link animation */
+.link-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+.link-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.link-btn:active { opacity: 0.8; }
+
+/* ─── BibTeX block ────────────────────────────────────────────── */
+.bibtex-block {
+  margin-top: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: rgba(var(--amber), 0.05);
+  border: 1px solid rgba(var(--amber), 0.15);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--ink-muted);
+}
+

@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Jonas Klotz',
+  description = 'PhD student at BIFOLD / TU Berlin — Remote Sensing & Explainable AI.',
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Ember particle canvases (shown only on wide screens via CSS) -->
+    <div class="embers-shell" aria-hidden="true">
+      <canvas class="embers-canvas embers-canvas--left" id="embers-left"></canvas>
+      <canvas class="embers-canvas embers-canvas--right" id="embers-right"></canvas>
+    </div>
+
+    <div style="position:relative;z-index:1">
+      <slot />
+    </div>
+
+    <script>
+      // Scroll reveal
+      const revealObs = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+        }),
+        { threshold: 0.08 }
+      );
+      document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => revealObs.observe(el));
+
+      // Ember / firefly particle system
+      function initEmbers(canvas: HTMLCanvasElement) {
+        const ctx = canvas.getContext('2d')!;
+        let w = 0, h = 0;
+        const particles: Array<{
+          x: number; y: number; r: number;
+          vx: number; vy: number; t: number; maxT: number; phase: number;
+        }> = [];
+
+        function resize() {
+          w = canvas.width = canvas.offsetWidth;
+          h = canvas.height = window.innerHeight;
+        }
+
+        function mkParticle(atBottom = false) {
+          return {
+            x: Math.random() * w,
+            y: atBottom ? h + 6 : Math.random() * h,
+            r: Math.random() * 1.8 + 0.3,
+            vx: (Math.random() - 0.5) * 0.25,
+            vy: -(Math.random() * 0.4 + 0.15),
+            t: atBottom ? 0 : Math.random() * 260,
+            maxT: Math.random() * 300 + 200,
+            phase: Math.random() * Math.PI * 2,
+          };
+        }
+
+        resize();
+        for (let i = 0; i < 80; i++) particles.push(mkParticle(false));
+
+        let raf: number;
+        function frame(now: number) {
+          ctx.clearRect(0, 0, w, h);
+          const t = now * 0.001;
+          for (const p of particles) {
+            p.t++;
+            p.x += p.vx + Math.sin(t * 0.65 + p.phase) * 0.1;
+            p.y += p.vy;
+            if (p.y < -8) { Object.assign(p, mkParticle(true)); continue; }
+            if (p.t >= p.maxT) { Object.assign(p, mkParticle(false)); continue; }
+            const life = p.t / p.maxT;
+            const alpha = (life < 0.25 ? life / 0.25 : life > 0.72 ? (1 - life) / 0.28 : 1) * 0.75;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+            ctx.fillStyle = `rgba(202,138,4,${alpha})`;
+            ctx.fill();
+          }
+          raf = requestAnimationFrame(frame);
+        }
+
+        raf = requestAnimationFrame(frame);
+        window.addEventListener('resize', resize);
+        return () => { cancelAnimationFrame(raf); };
+      }
+
+      const leftCanvas  = document.getElementById('embers-left')  as HTMLCanvasElement | null;
+      const rightCanvas = document.getElementById('embers-right') as HTMLCanvasElement | null;
+      if (leftCanvas)  initEmbers(leftCanvas);
+      if (rightCanvas) initEmbers(rightCanvas);
+    </script>
+  </body>
+</html>

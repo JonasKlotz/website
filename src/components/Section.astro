@@ -1,0 +1,17 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  wide?: boolean;
+}
+const { id, title, wide = false } = Astro.props;
+---
+<section {id} class="max-w-content mx-auto px-6 md:px-10 py-14" style={`max-width:${wide ? '68rem' : '52rem'}`}>
+  <h2
+    class="font-display font-semibold text-ink mb-10 reveal"
+    style="font-size:1.875rem; letter-spacing:-0.025em; line-height:1.15"
+  >
+    {title}
+  </h2>
+  <slot />
+</section>

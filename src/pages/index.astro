@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import PublicationCard from '../components/PublicationCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const year = new Date().getFullYear();
+const publications = (await getCollection('publications')).sort((a, b) => {
+  if (b.data.year !== a.data.year) return b.data.year - a.data.year;
+  return (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0);
+});
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.year - a.data.year
+);
+---
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+
+    <!-- Full-bleed section divider -->
+    <div class="max-w-content mx-auto px-6 md:px-10" style="max-width:52rem">
+      <div class="section-divider" />
+    </div>
+
+    <Section id="publications" title="Publications" wide={true}>
+      {publications.map((pub) => <PublicationCard publication={pub} />)}
+    </Section>
+
+    {projects.length > 0 && (
+      <Fragment>
+        <div class="max-w-content mx-auto px-6 md:px-10" style="max-width:52rem">
+          <div class="section-divider" />
+        </div>
+        <Section id="projects" title="Projects" wide={true}>
+          {projects.map((proj) => <ProjectCard project={proj} />)}
+        </Section>
+      </Fragment>
+    )}
+  </main>
+
+  <div class="max-w-content mx-auto px-6 md:px-10" style="max-width:52rem">
+    <div class="section-divider" />
+  </div>
+  <footer
+    class="max-w-content mx-auto px-6 md:px-10 py-8"
+    style="max-width:52rem"
+  >
+    <p class="font-mono text-xs" style="color:var(--ink-faint); letter-spacing:0.06em">
+      © {year} Jonas Klotz
+    </p>
+  </footer>
+</Base>
