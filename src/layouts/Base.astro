@@ -7,8 +7,36 @@ interface Props {
 }
 const {
   title = 'Jonas Klotz',
-  description = 'PhD student at BIFOLD / TU Berlin — Remote Sensing & Explainable AI.',
+  description = 'Jonas Klotz — PhD student at BIFOLD / TU Berlin researching Remote Sensing and Explainable AI.',
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://jonasklotz.com');
+const ogImage = 'https://jonasklotz.com/images/portrait.jpg';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Jonas Klotz',
+  url: 'https://jonasklotz.com',
+  image: ogImage,
+  jobTitle: 'PhD Student',
+  affiliation: {
+    '@type': 'Organization',
+    name: 'BIFOLD – Berlin Institute for the Foundations of Learning and Data',
+    url: 'https://bifold.berlin',
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'TU Berlin',
+  },
+  sameAs: [
+    'https://scholar.google.de/citations?user=QrMeBpMAAAAJ&hl=en',
+    'https://github.com/JonasKlotz',
+    'https://www.linkedin.com/in/jonas-klotz/',
+    'https://www.bifold.berlin/people/jonas-klotz.html',
+  ],
+  knowsAbout: ['Remote Sensing', 'Explainable AI', 'Machine Learning', 'Federated Learning'],
+};
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +44,29 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Jonas Klotz" />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="profile:first_name" content="Jonas" />
+    <meta property="profile:last_name" content="Klotz" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
