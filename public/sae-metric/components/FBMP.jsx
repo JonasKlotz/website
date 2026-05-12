@@ -14,27 +14,28 @@ function FBMPSection() {
   const [target, setTarget] = useState(data.target);
   const [targetLabel, setTargetLabel] = useState(data.targetLabel);
 
-  // Precompute the FBMP trajectory for given beta, target, maxK
+  // Precompute the FBMP trajectory for given beta, target, maxK.
+  // Matches paper Algorithm 1: update r and ŷ first, then check F1 — if no
+  // improvement break WITHOUT adding l* to S (stopped step not in trajectory).
   const trajectory = useMemo(() => {
     const traj = [];
     let residual = [...target];
     let approx = target.map(() => 0);
     const selected = [];
-    const available = data.latents.map((_, i) => i);
     for (let it = 0; it < maxK; it++) {
-      // pick best by Fβ on residual
-      let bestI = -1,bestScore = -1;
-      for (const i of available) {
+      let bestI = -1, bestScore = -1;
+      for (let i = 0; i < data.latents.length; i++) {
         if (selected.includes(i)) continue;
         const s = fbeta(residual, data.latents[i].z, beta);
-        if (s > bestScore) {bestScore = s;bestI = i;}
+        if (s > bestScore) { bestScore = s; bestI = i; }
       }
       if (bestI < 0) break;
       const z = data.latents[bestI].z;
+      const newResidual = residual.map((r, i) => r & (1 - z[i]));
       const newApprox = approx.map((a, i) => a | z[i]);
       const f1Before = f1Stats(target, approx).F1;
       const f1After = f1Stats(target, newApprox).F1;
-      const stop = it > 0 && f1After <= f1Before;
+      if (f1After <= f1Before) break; // stopping criterion — discard l*, don't add to S
       traj.push({
         picked: bestI,
         pickedLabel: data.latents[bestI].label,
@@ -43,11 +44,9 @@ function FBMPSection() {
         approxAfter: newApprox,
         f1Before, f1After,
         fbetaScore: bestScore,
-        stop
       });
-      if (stop) break;
       selected.push(bestI);
-      residual = residual.map((r, i) => r & 1 - z[i]);
+      residual = newResidual;
       approx = newApprox;
     }
     return traj;
@@ -72,6 +71,8 @@ function FBMPSection() {
   const currentResidual = cur ? cur.residualBefore : target.map(() => 0);
   const currentApprox = cur ? cur.approxAfter : target.map(() => 0);
   const currentF1 = f1Stats(target, currentApprox).F1;
+  const finalApprox = trajectory.length > 0 ? trajectory[trajectory.length - 1].approxAfter : target.map(() => 0);
+  const finalF1 = f1Stats(target, finalApprox).F1;
 
   // toggle a target bit (mini sandbox)
   function toggleTarget(i) {
@@ -265,8 +266,7 @@ function FBMPSection() {
                       <div style={{ background: "var(--paper-2)", padding: 12, border: "1px solid var(--rule)", borderRadius: 4, fontSize: 13, lineHeight: 1.5 }}>
                         <div>Picked: <strong>{cur.pickedLabel}</strong></div>
                         <div className="small mt-1">F<sub>{beta}</sub> on residual = {cur.fbetaScore.toFixed(3)}</div>
-                        <div className="small">Joint F1: {cur.f1Before.toFixed(2)} → <strong style={{ color: cur.f1After > cur.f1Before ? "var(--pos)" : "var(--neg)" }}>{cur.f1After.toFixed(2)}</strong></div>
-                        {cur.stop && <div className="tag warn mt-1">stopping criterion met</div>}
+                        <div className="small">Joint F1: {cur.f1Before.toFixed(2)} → <strong style={{ color: "var(--pos)" }}>{cur.f1After.toFixed(2)}</strong></div>
                       </div>
                     }
                     <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
@@ -282,14 +282,16 @@ function FBMPSection() {
                 <div>
                   <h4>Algorithm</h4>
                   <pre style={{ fontFamily: "var(--mono)", fontSize: 11, lineHeight: 1.55, background: "var(--paper-2)", padding: 12, border: "1px solid var(--rule)", borderRadius: 4, overflow: "auto" }}>
-{`r₀ ← y          # residual
-ŷ₀ ← 0
-for κ = 0..k-1:
-  l* = argmax_l Fβ(rκ, zₗ)
-  rκ₊₁ ← rκ ∧ ¬zₗ*
-  ŷκ₊₁ ← ŷκ ∨  zₗ*
-  if F1(y,ŷκ₊₁) ≤ F1(y,ŷκ):
+{`r₀ ← y          # Initialize residual
+ŷ₀ ← 0          # Initialize approximation
+S  ← ∅          # Initialize empty subset
+for κ = 0 to k−1:
+  l* ← argmax_l SIMbin(rκ, zₗ)   # Select most-aligned concept
+  rκ₊₁ ← rκ ∧ ¬zₗ*               # Update residual
+  ŷκ₊₁ ← ŷκ ∨ zₗ*                # Update approximation
+  if F₁(y, ŷκ₊₁) ≤ F₁(y, ŷκ):   # Stopping criterion
     break
+  S ← S ∪ {l*}                    # Add to subset
 return S`}
                   </pre>
 
@@ -316,17 +318,17 @@ return S`}
           {/* Bottom comparison bar */}
           <div style={{ marginTop: 16, padding: "14px 24px", background: "var(--paper-2)", border: "1px solid var(--rule)", borderRadius: "var(--rad)", display: "grid", gridTemplateColumns: "1fr 1px 1fr", gap: 0, alignItems: "center" }}>
             <div style={{ paddingRight: 24 }}>
-              <div className="label" style={{ marginBottom: 4 }}>FBMP F<sub>{beta}</sub> — {curStep} of {maxStep} steps</div>
+              <div className="label" style={{ marginBottom: 4 }}>FBMP F<sub>{beta}</sub> — final F1 on S ({maxStep} latent{maxStep !== 1 ? "s" : ""})</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
-                <span style={{ fontFamily: "var(--mono)", fontSize: 28, color: curStep > 0 ? "var(--accent)" : "var(--ink-3)" }}>
-                  {curStep > 0 ? currentF1.toFixed(2) : "—"}
+                <span style={{ fontFamily: "var(--mono)", fontSize: 28, color: maxStep > 0 ? "var(--accent)" : "var(--ink-3)" }}>
+                  {maxStep > 0 ? finalF1.toFixed(2) : "—"}
                 </span>
-                {curStep > 0 && <span className="small">F1 · coalition of {curStep} latent{curStep > 1 ? "s" : ""}: {trajectory.slice(0, curStep).map(t => t.pickedLabel.replace(/L#\d+ · /, "")).join(" + ")}</span>}
+                {maxStep > 0 && <span className="small">{trajectory.map(t => t.pickedLabel.replace(/L#\d+ · /, "")).join(" + ")}</span>}
               </div>
             </div>
             <div style={{ width: 1, height: 40, background: "var(--rule)" }} />
             <div style={{ paddingLeft: 24 }}>
-              <div className="label" style={{ marginBottom: 4 }}>Naïve top-3 OR baseline</div>
+              <div className="label" style={{ marginBottom: 4 }}>Naïve top-{naiveK} OR baseline</div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
                 <span style={{ fontFamily: "var(--mono)", fontSize: 28, color: "var(--ink-3)" }}>
                   {f1Stats(target, naiveApprox).F1.toFixed(2)}

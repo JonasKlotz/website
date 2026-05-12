@@ -107,7 +107,7 @@ function shade(hex, amount) {
 
 function AbstractSection({ inline }) {
   return (
-    <section id="abstract" style={inline ? { paddingTop: 32, paddingBottom: 32, borderTop: 0 } : {}}>
+    <section id="abstract" style={inline ? { paddingTop: 24, paddingBottom: 16, borderTop: 0 } : {}}>
       <div className="page">
         <div className="measure">
           <div className="kicker">Abstract</div>

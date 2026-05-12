@@ -1,34 +1,9 @@
 /* global React, ImgSlot */
-const { useState, useEffect, useRef } = React;
-
-// Scroll-driven hero: as user scrolls, the cartoon walkthrough animates
-// through (1) SAE latents lighting up, (2) matching to concept, (3) synthetic
-// pair appearing, (4) δ_add / δ_rem readouts updating.
+const { useState } = React;
 
 function HeroSection() {
-  const wrapRef = useRef(null);
-  const [p, setP] = useState(0); // 0..1 scroll progress within section
+  const [stage, setStage] = useState(0);
   const [focus, setFocus] = useState(null); // 'add' | 'rem' | null
-
-  useEffect(() => {
-    function onScroll() {
-      if (!wrapRef.current) return;
-      const rect = wrapRef.current.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      const scrolled = -rect.top;
-      const t = Math.max(0, Math.min(1, scrolled / total));
-      setP(t);
-    }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // 4 stages: 0..0.25 encode, 0.25..0.5 match, 0.5..0.75 perturb, 0.75..1 score
-  const stage =
-    p < 0.22 ? 0 :
-    p < 0.46 ? 1 :
-    p < 0.72 ? 2 : 3;
 
   // latent firing pattern
   const latentsBefore = [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0];
@@ -44,16 +19,6 @@ function HeroSection() {
   const deltaRem = showScore ? -0.74 : 0;
   const tapas = (deltaAdd - deltaRem);
 
-  // Programmatic scroll to a stage (0..3)
-  function scrollToStage(target) {
-    if (!wrapRef.current) return;
-    // Midpoints of each stage band: [0..0.22], [0.22..0.46], [0.46..0.72], [0.72..1]
-    const mids = [0.06, 0.30, 0.55, 0.85];
-    const rect = wrapRef.current.getBoundingClientRect();
-    const total = rect.height - window.innerHeight;
-    const top = window.scrollY + rect.top + mids[target] * total;
-    window.scrollTo({ top, behavior: "smooth" });
-  }
   const labels = ["Encode", "Match", "Perturb", "Score"];
 
   return (
@@ -80,11 +45,8 @@ function HeroSection() {
 
     {window.__abstractSlot && window.__abstractSlot()}
 
-    <section style={{ paddingTop: 0, borderTop: 0 }}>
-      {/* The animated walkthrough */}
-      <div ref={wrapRef} style={{ position: "relative", height: "320vh", marginTop: 80 }}>
-        <div className="hero-track" style={{ position: "sticky", top: 70, height: "calc(100vh - 70px)", display: "flex", alignItems: "center" }}>
-          <div className="page" style={{ width: "100%" }}>
+    <section style={{ paddingTop: 16, borderTop: 0 }}>
+      <div className="page">
             <div className="hero-stage" style={{ padding: "28px 32px 40px", minHeight: 540 }}>
               <div className="stage-chip">
                 STAGE {stage + 1} / 4 — {["ENCODE", "MATCH", "PERTURB", "SCORE"][stage]}
@@ -96,7 +58,7 @@ function HeroSection() {
                 gap: 12, marginBottom: 22, flexWrap: "wrap",
               }}>
                 <button
-                  onClick={() => scrollToStage(Math.max(0, stage - 1))}
+                  onClick={() => setStage(Math.max(0, stage - 1))}
                   disabled={stage === 0}
                   style={{
                     fontFamily: "var(--sans)", fontSize: 14, padding: "10px 18px", fontWeight: 500,
@@ -114,14 +76,14 @@ function HeroSection() {
                   {labels.map((l, i) => (
                     <button key={l}
                             className={stage === i ? "on" : ""}
-                            onClick={() => scrollToStage(i)}
+                            onClick={() => setStage(i)}
                             style={{ fontSize: 13, padding: "10px 18px", fontWeight: 500 }}>
                       <span style={{ fontFamily: "var(--mono)", marginRight: 6, opacity: 0.55 }}>{i + 1}</span>{l}
                     </button>
                   ))}
                 </div>
                 <button
-                  onClick={() => scrollToStage(Math.min(3, stage + 1))}
+                  onClick={() => setStage(Math.min(3, stage + 1))}
                   disabled={stage === 3}
                   style={{
                     fontFamily: "var(--sans)", fontSize: 14, padding: "10px 18px", fontWeight: 500,
@@ -230,14 +192,12 @@ function HeroSection() {
               </div>
 
               <div className="figcaption" style={{ marginTop: 28, borderTop: "1px solid var(--rule-soft)", paddingTop: 16 }}>
-                <strong style={{ color: "var(--ink)" }}>Fig. 1.</strong> Scroll to step through the framework.
+                <strong style={{ color: "var(--ink)" }}>Fig. 1.</strong> Click through the stages to step through the framework.
                 A pretrained vision encoder produces an embedding; the SAE encodes it into sparse latents;
                 a coalition of latents is matched to each annotated attribute; a targeted single-attribute
                 perturbation then tests whether the matched latents move in the expected direction.
               </div>
             </div>
-          </div>
-        </div>
       </div>
     </section>
     </>
