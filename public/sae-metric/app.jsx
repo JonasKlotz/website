@@ -30,7 +30,7 @@ function App() {
     <>
       <header className="topbar">
         <div className="topbar-inner">
-          <span style={{display:"flex",alignItems:"center",gap:16}}><a href="/" style={{fontFamily:"var(--mono)",fontSize:12,letterSpacing:"0.08em",color:"var(--ink-3)",textDecoration:"none",opacity:0.8}} onMouseEnter={e=>e.target.style.color="var(--accent)"} onMouseLeave={e=>e.target.style.color="var(--ink-3)"}>← jonasklotz.com</a><span className="brand" style={{opacity:0.5}}>·</span><span className="brand">SAE-METRIC</span></span>
+          <span style={{display:"flex",alignItems:"center",gap:16}}><a href="/" style={{fontFamily:"var(--mono)",fontSize:12,letterSpacing:"0.08em",color:"var(--ink-3)",textDecoration:"none",opacity:0.8}} onMouseEnter={e=>e.target.style.color="var(--accent)"} onMouseLeave={e=>e.target.style.color="var(--ink-3)"}>← jonasklotz.com</a><span className="brand" style={{opacity:0.5}}>·</span><span className="brand">TAPAS</span></span>
           <nav>
             <a href="#overview">Overview</a>
             <a href="#fbmp">FBMP</a>
@@ -60,7 +60,7 @@ function App() {
       <footer className="foot">
         <div className="page">
           <div>
-            <div className="brand">SAE-METRIC</div>
+            <div className="brand">TAPAS</div>
             <div className="small mt-1">An interactive companion to an anonymous submission.</div>
           </div>
           <div className="small">
