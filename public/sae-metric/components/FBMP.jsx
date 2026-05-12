@@ -9,7 +9,7 @@ function FBMPSection() {
   const [beta, setBeta] = useState(0.5);
   const [step, setStep] = useState(0); // 0 = before any selection, 1..k after each
   const [mode, setMode] = useState("fbmp"); // 'fbmp' or 'topk'
-  const [maxK, setMaxK] = useState(4);
+  const [maxK, setMaxK] = useState(2);
   const [naiveK, setNaiveK] = useState(3);
   const [target, setTarget] = useState(data.target);
   const [targetLabel, setTargetLabel] = useState(data.targetLabel);
@@ -123,7 +123,7 @@ function FBMPSection() {
                   </div>
                   <span className="small">k =</span>
                   <div className="seg">
-                    {[1, 2, 3, 4].map((k) =>
+                    {[1, 2].map((k) =>
                       <button key={k} className={maxK === k ? "on" : ""} onClick={() => {setMaxK(k);setStep(0);}}>
                         {k}
                       </button>
