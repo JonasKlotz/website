@@ -7,7 +7,7 @@
 window.SAE_REAL = (function () {
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data/results.json', false);
+    xhr.open('GET', '/sae-metric/data/results.json', false);
     xhr.send();
     if (xhr.status === 200 || xhr.status === 0) return JSON.parse(xhr.responseText);
   } catch (e) { console.warn('results.json not available:', e.message); }
