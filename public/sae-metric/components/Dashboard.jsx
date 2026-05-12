@@ -1,5 +1,5 @@
 /* global React, Axis */
-const { useState, useMemo } = React;
+const { useState } = React;
 
 function DashboardSection() {
   const D = window.SAE_DATA.dashboard;
@@ -11,21 +11,34 @@ function DashboardSection() {
 
   const variantColors = { BatchTopK: "var(--accent)", Matryoshka: "#2d8a5a", TopK: "#b53a3a", JumpReLU: "#6e3aaa" };
 
-  const W = 720, H = 360, padL = 56, padR = 24, padT = 24, padB = 56;
+  const W = 580, H = 360, padL = 56, padR = 40, padT = 24, padB = 56;
   const innerW = W - padL - padR;
   const innerH = H - padT - padB;
   const xMax = D.dictSizes.length - 1;
-  const yMax = 1;
 
   const series = D.variants.map(v => ({
     name: v,
-    values: D.series[backbone][dataset][v][criterion][metric],
+    values: D.series[backbone]?.[dataset]?.[v]?.[criterion]?.[metric] ?? [],
     color: variantColors[v],
     visible: showVariants[v],
   }));
 
+  // Data-driven y range from visible series
+  const visibleValues = series.filter(s => s.visible).flatMap(s => s.values);
+  const rawMax = visibleValues.length ? Math.max(...visibleValues) : 1;
+  const rawMin = visibleValues.length ? Math.min(...visibleValues) : 0;
+  const snap = 0.05;
+  const yMax = Math.min(1, Math.ceil(rawMax / snap) * snap);
+  const yMin = Math.max(0, Math.floor(rawMin / snap) * snap);
+  const yRange = yMax > yMin ? yMax - yMin : 1;
+
+  // Nice tick step: ~4–6 ticks
+  const tickStep = yRange <= 0.2 ? 0.05 : yRange <= 0.5 ? 0.1 : 0.25;
+  const yTicks = [];
+  for (let t = yMin; t <= yMax + 1e-9; t = +(t + tickStep).toFixed(6)) yTicks.push(t);
+
   function xpos(i) { return padL + (i / xMax) * innerW; }
-  function ypos(v) { return padT + (1 - v / yMax) * innerH; }
+  function ypos(v) { return padT + (1 - (v - yMin) / yRange) * innerH; }
 
   return (
     <section id="dashboard">
@@ -70,8 +83,8 @@ function DashboardSection() {
             <div className="panel-pad">
               <div style={{ display: "grid", gridTemplateColumns: "1fr 200px", gap: 24 }}>
                 <svg width={W} height={H} style={{ maxWidth: "100%" }}>
-                  {/* gridlines */}
-                  {[0.2, 0.4, 0.6, 0.8].map(t => (
+                  {/* gridlines at y-tick positions */}
+                  {yTicks.map(t => (
                     <line key={t} x1={padL} x2={W - padR}
                           y1={ypos(t)} y2={ypos(t)}
                           stroke="var(--rule-soft)" strokeDasharray="2 4" />
@@ -83,13 +96,13 @@ function DashboardSection() {
                     fmt={v => D.dictSizes[v]}
                   />
                   <Axis x={padL} y={padT} w={innerW} h={innerH} dir="y"
-                    ticks={[0, 0.25, 0.5, 0.75, 1].map(t => ({ v: t, max: 1 }))}
+                    ticks={yTicks.map(t => ({ v: t - yMin, max: yRange }))}
                     label={metric === "matchScore" ? "Δ MATCHScore" : "TAPAScore"}
-                    fmt={v => v.toFixed(2)}
+                    fmt={v => (v + yMin).toFixed(2)}
                   />
 
-                  {/* lines */}
-                  {series.map((s) => s.visible && (
+                  {/* lines + dots */}
+                  {series.map((s) => s.visible && s.values.length > 0 && (
                     <g key={s.name}>
                       <polyline
                         fill="none"
@@ -98,7 +111,8 @@ function DashboardSection() {
                         points={s.values.map((v, i) => `${xpos(i)},${ypos(v)}`).join(" ")}
                       />
                       {s.values.map((v, i) => (
-                        <circle key={i} cx={xpos(i)} cy={ypos(v)} r="4" fill="var(--card)" stroke={s.color} strokeWidth="2">
+                        <circle key={i} cx={xpos(i)} cy={ypos(v)} r="4"
+                          fill="var(--card)" stroke={s.color} strokeWidth="2">
                           <title>{s.name} · L={D.dictSizes[i]} · {v.toFixed(3)}</title>
                         </circle>
                       ))}
