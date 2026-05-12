@@ -1,0 +1,142 @@
+/* global React, Axis */
+const { useState, useMemo } = React;
+
+function DashboardSection() {
+  const D = window.SAE_DATA.dashboard;
+  const [backbone, setBackbone] = useState("CLIP");
+  const [dataset, setDataset] = useState("CUB");
+  const [metric, setMetric] = useState("matchScore"); // or tapaScore
+  const [criterion, setCriterion] = useState("FBMP F0.5");
+  const [showVariants, setShowVariants] = useState({ BatchTopK: true, Matryoshka: true, TopK: true, JumpReLU: true });
+
+  const variantColors = { BatchTopK: "var(--accent)", Matryoshka: "#2d8a5a", TopK: "#b53a3a", JumpReLU: "#6e3aaa" };
+
+  const W = 720, H = 360, padL = 56, padR = 24, padT = 24, padB = 56;
+  const innerW = W - padL - padR;
+  const innerH = H - padT - padB;
+  const xMax = D.dictSizes.length - 1;
+  const yMax = 1;
+
+  const series = D.variants.map(v => ({
+    name: v,
+    values: D.series[backbone][dataset][v][criterion][metric],
+    color: variantColors[v],
+    visible: showVariants[v],
+  }));
+
+  function xpos(i) { return padL + (i / xMax) * innerW; }
+  function ypos(v) { return padT + (1 - v / yMax) * innerH; }
+
+  return (
+    <section id="dashboard">
+      <div className="page">
+        <div className="measure">
+          <div className="kicker">§ 5 · Results dashboard</div>
+          <h2>Moderate dictionaries win.</h2>
+          <p>
+            One chart, four dropdowns. Pick a backbone, a dataset, a matching criterion, and
+            switch between matching score and TAPAScore on the y-axis. The story that emerges
+            across configurations: matching keeps improving with dictionary size, but causal
+            alignment plateaus or collapses — moderate dictionaries hit the sweet spot.
+          </p>
+        </div>
+
+        <div className="wide mt-3">
+          <div className="panel">
+            <div className="panel-hd" style={{ flexWrap: "wrap", gap: 12 }}>
+              <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
+                <div><span className="label" style={{ display: "inline", marginRight: 6 }}>Backbone</span>
+                  <div className="seg">{D.backbones.map(b => (
+                    <button key={b} className={backbone === b ? "on" : ""} onClick={() => setBackbone(b)}>{b}</button>
+                  ))}</div>
+                </div>
+                <div><span className="label" style={{ display: "inline", marginRight: 6 }}>Dataset</span>
+                  <div className="seg">{D.datasets.map(b => (
+                    <button key={b} className={dataset === b ? "on" : ""} onClick={() => setDataset(b)}>{b}</button>
+                  ))}</div>
+                </div>
+                <div><span className="label" style={{ display: "inline", marginRight: 6 }}>Criterion</span>
+                  <select className="sel" value={criterion} onChange={e => setCriterion(e.target.value)}>
+                    {D.criteria.map(c => <option key={c}>{c}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div className="seg">
+                <button className={metric === "matchScore" ? "on" : ""} onClick={() => setMetric("matchScore")}>Δ MATCHScore</button>
+                <button className={metric === "tapaScore" ? "on" : ""} onClick={() => setMetric("tapaScore")}>TAPAScore</button>
+              </div>
+            </div>
+
+            <div className="panel-pad">
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 200px", gap: 24 }}>
+                <svg width={W} height={H} style={{ maxWidth: "100%" }}>
+                  {/* gridlines */}
+                  {[0.2, 0.4, 0.6, 0.8].map(t => (
+                    <line key={t} x1={padL} x2={W - padR}
+                          y1={ypos(t)} y2={ypos(t)}
+                          stroke="var(--rule-soft)" strokeDasharray="2 4" />
+                  ))}
+                  {/* axes */}
+                  <Axis x={padL} y={padT} w={innerW} h={innerH} dir="x"
+                    ticks={D.dictSizes.map((d, i) => ({ v: i, max: xMax }))}
+                    label="dictionary size"
+                    fmt={v => D.dictSizes[v]}
+                  />
+                  <Axis x={padL} y={padT} w={innerW} h={innerH} dir="y"
+                    ticks={[0, 0.25, 0.5, 0.75, 1].map(t => ({ v: t, max: 1 }))}
+                    label={metric === "matchScore" ? "Δ MATCHScore" : "TAPAScore"}
+                    fmt={v => v.toFixed(2)}
+                  />
+
+                  {/* lines */}
+                  {series.map((s) => s.visible && (
+                    <g key={s.name}>
+                      <polyline
+                        fill="none"
+                        stroke={s.color}
+                        strokeWidth="2"
+                        points={s.values.map((v, i) => `${xpos(i)},${ypos(v)}`).join(" ")}
+                      />
+                      {s.values.map((v, i) => (
+                        <circle key={i} cx={xpos(i)} cy={ypos(v)} r="4" fill="var(--card)" stroke={s.color} strokeWidth="2">
+                          <title>{s.name} · L={D.dictSizes[i]} · {v.toFixed(3)}</title>
+                        </circle>
+                      ))}
+                    </g>
+                  ))}
+                </svg>
+
+                {/* Legend / variant toggles */}
+                <div>
+                  <div className="label">SAE variant</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {D.variants.map(v => (
+                      <label key={v} style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer", fontSize: 13 }}>
+                        <input type="checkbox" checked={showVariants[v]}
+                               onChange={() => setShowVariants(s => ({ ...s, [v]: !s[v] }))} />
+                        <span style={{ display: "inline-block", width: 12, height: 3, background: variantColors[v] }} />
+                        <span style={{ fontFamily: "var(--sans)" }}>{v}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <h4 className="mt-3">Read this chart</h4>
+                  <p className="small">
+                    {metric === "matchScore"
+                      ? "Matching scores tend to grow with dictionary size (more candidate latents = more chances to find good alignment), but the rate depends on variant."
+                      : "TAPAScore peaks early and decays for TopK on CUB. On COCO, all variants degrade past dict size 1024 — overcompleteness hurts causal alignment."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="figcaption">
+            <strong>Fig. 5.</strong> Reproducing Figs 5/6 + S25/S26 of the paper in a single configurable view.
+            Click a point on the scatter (next section) to jump back here.
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { DashboardSection });

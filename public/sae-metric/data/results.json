@@ -1,0 +1,1902 @@
+{
+  "dashboard": {
+    "series": {
+      "CLIP": {
+        "CUB": {
+          "BatchTopK": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.031435,
+                0.041918,
+                0.055099,
+                -0.000692,
+                0.010293,
+                0.008016
+              ],
+              "tapaScore": [
+                0.43367,
+                0.454143,
+                0.343073,
+                0.285032,
+                0.326287,
+                0.263212
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.039614,
+                0.048176,
+                0.062063,
+                0.007473,
+                0.013306,
+                0.016093
+              ],
+              "tapaScore": [
+                0.4388,
+                0.463689,
+                0.386635,
+                0.314354,
+                0.349812,
+                0.337879
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.043504,
+                0.051796,
+                0.071985,
+                0.009173,
+                0.017894,
+                0.019802
+              ],
+              "tapaScore": [
+                0.480055,
+                0.575179,
+                0.461984,
+                0.339243,
+                0.42073,
+                0.436413
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.043866,
+                0.044881,
+                0.062099,
+                -0.004591,
+                0.003957,
+                0.009596
+              ],
+              "tapaScore": [
+                0.462325,
+                0.551313,
+                0.506989,
+                0.309581,
+                0.306512,
+                0.334811
+              ]
+            }
+          },
+          "Matryoshka": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.037061,
+                0.062405,
+                0.014668,
+                0.012748,
+                0.018522,
+                0.001526
+              ],
+              "tapaScore": [
+                0.368274,
+                0.393455,
+                0.319809,
+                0.292874,
+                0.362768,
+                0.281964
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.048464,
+                0.076833,
+                0.014379,
+                0.024646,
+                0.027676,
+                0.017248
+              ],
+              "tapaScore": [
+                0.325264,
+                0.381231,
+                0.295261,
+                0.372656,
+                0.401296,
+                0.335493
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.053113,
+                0.082205,
+                0.019862,
+                0.031466,
+                0.03542,
+                0.022278
+              ],
+              "tapaScore": [
+                0.351517,
+                0.479714,
+                0.378452,
+                0.403682,
+                0.411865,
+                0.292533
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.044877,
+                0.062432,
+                0.000761,
+                0.014889,
+                0.012322,
+                0.009056
+              ],
+              "tapaScore": [
+                0.346062,
+                0.518923,
+                0.380498,
+                0.338902,
+                0.311626,
+                0.257757
+              ]
+            }
+          },
+          "TopK": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.024465,
+                0.043569,
+                0.05582,
+                0.040827,
+                0.045276,
+                0.041382
+              ],
+              "tapaScore": [
+                0.336048,
+                0.46861,
+                0.30208,
+                0.177755,
+                0.233862,
+                0.336685
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.033031,
+                0.051413,
+                0.062552,
+                0.068328,
+                0.066776,
+                0.054525
+              ],
+              "tapaScore": [
+                0.329356,
+                0.499279,
+                0.393113,
+                0.369868,
+                0.437744,
+                0.401569
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.036491,
+                0.057296,
+                0.072092,
+                0.079887,
+                0.079968,
+                0.064037
+              ],
+              "tapaScore": [
+                0.372315,
+                0.594272,
+                0.537675,
+                0.479714,
+                0.407703,
+                0.404069
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.036824,
+                0.050404,
+                0.059635,
+                0.062461,
+                0.062562,
+                0.055087
+              ],
+              "tapaScore": [
+                0.329697,
+                0.652574,
+                0.695534,
+                0.485169,
+                0.427208,
+                0.476986
+              ]
+            }
+          },
+          "JumpReLU": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.03095,
+                0.026853,
+                0.041684,
+                0.033236,
+                0.034652,
+                0.029467
+              ],
+              "tapaScore": [
+                0.424169,
+                0.421412,
+                0.494806,
+                0.30208,
+                0.338407,
+                0.231941
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.0373,
+                0.034598,
+                0.040502,
+                0.046415,
+                0.045874,
+                0.051621
+              ],
+              "tapaScore": [
+                0.404364,
+                0.418002,
+                0.494114,
+                0.357313,
+                0.441933,
+                0.409478
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.039529,
+                0.037929,
+                0.046748,
+                0.052579,
+                0.052247,
+                0.057959
+              ],
+              "tapaScore": [
+                0.509035,
+                0.571088,
+                0.57211,
+                0.404705,
+                0.55404,
+                0.491988
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.04172,
+                0.03301,
+                0.04237,
+                0.045991,
+                0.04395,
+                0.050232
+              ],
+              "tapaScore": [
+                0.55029,
+                0.42789,
+                0.459598,
+                0.479714,
+                0.476645,
+                0.444255
+              ]
+            }
+          }
+        },
+        "COCO": {
+          "BatchTopK": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.199095,
+                0.352159,
+                0.413943,
+                0.424094,
+                0.403024,
+                0.399221
+              ],
+              "tapaScore": [
+                0.191693,
+                0.222045,
+                0.231629,
+                0.242412,
+                0.241613,
+                0.239617
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.201823,
+                0.34912,
+                0.422149,
+                0.437566,
+                0.441669,
+                0.417614
+              ],
+              "tapaScore": [
+                0.188898,
+                0.232029,
+                0.252396,
+                0.245208,
+                0.246006,
+                0.247604
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.199891,
+                0.352404,
+                0.422548,
+                0.442896,
+                0.450991,
+                0.42997
+              ],
+              "tapaScore": [
+                0.195288,
+                0.276757,
+                0.329872,
+                0.298722,
+                0.315495,
+                0.255591
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.200268,
+                0.353625,
+                0.423311,
+                0.427826,
+                0.419695,
+                0.386624
+              ],
+              "tapaScore": [
+                0.201677,
+                0.284345,
+                0.329073,
+                0.315495,
+                0.301118,
+                0.299521
+              ]
+            }
+          },
+          "Matryoshka": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.282616,
+                0.331567,
+                0.332899,
+                0.354535,
+                0.346701,
+                0.369378
+              ],
+              "tapaScore": [
+                0.21246,
+                0.21845,
+                0.218051,
+                0.278754,
+                0.25639,
+                0.236022
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.277356,
+                0.343795,
+                0.358947,
+                0.39084,
+                0.384453,
+                0.386187
+              ],
+              "tapaScore": [
+                0.212859,
+                0.22484,
+                0.22524,
+                0.253594,
+                0.251997,
+                0.234026
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.27911,
+                0.349037,
+                0.378923,
+                0.406243,
+                0.411698,
+                0.404209
+              ],
+              "tapaScore": [
+                0.213658,
+                0.251597,
+                0.279153,
+                0.282748,
+                0.29992,
+                0.299521
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.276422,
+                0.34197,
+                0.354515,
+                0.358256,
+                0.344919,
+                0.350221
+              ],
+              "tapaScore": [
+                0.235623,
+                0.253195,
+                0.24361,
+                0.255591,
+                0.258786,
+                0.271166
+              ]
+            }
+          },
+          "TopK": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.200795,
+                0.349883,
+                0.420867,
+                0.418578,
+                0.387664,
+                0.400668
+              ],
+              "tapaScore": [
+                0.196086,
+                0.220447,
+                0.240016,
+                0.250799,
+                0.23722,
+                0.242013
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.203174,
+                0.347678,
+                0.427296,
+                0.435644,
+                0.42295,
+                0.416992
+              ],
+              "tapaScore": [
+                0.174521,
+                0.226438,
+                0.246805,
+                0.256789,
+                0.241613,
+                0.242812
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.202458,
+                0.349266,
+                0.426365,
+                0.438879,
+                0.434421,
+                0.430676
+              ],
+              "tapaScore": [
+                0.198083,
+                0.283946,
+                0.327476,
+                0.355431,
+                0.323083,
+                0.258786
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.202691,
+                0.350315,
+                0.425673,
+                0.42662,
+                0.393439,
+                0.38814
+              ],
+              "tapaScore": [
+                0.203674,
+                0.287939,
+                0.323083,
+                0.336262,
+                0.295527,
+                0.304313
+              ]
+            }
+          },
+          "JumpReLU": {
+            "F1 (k=1)": {
+              "matchScore": [
+                0.061745,
+                0.107694,
+                0.250365,
+                0.378071,
+                0.398627,
+                0.391379
+              ],
+              "tapaScore": [
+                0.108626,
+                0.13738,
+                0.20647,
+                0.233626,
+                0.248403,
+                0.246406
+              ]
+            },
+            "FBMP F1": {
+              "matchScore": [
+                0.062692,
+                0.100442,
+                0.244718,
+                0.387349,
+                0.425201,
+                0.419906
+              ],
+              "tapaScore": [
+                0.108626,
+                0.136981,
+                0.210463,
+                0.235623,
+                0.248802,
+                0.244808
+              ]
+            },
+            "FBMP F0.5": {
+              "matchScore": [
+                0.062254,
+                0.102053,
+                0.248288,
+                0.393071,
+                0.433361,
+                0.426832
+              ],
+              "tapaScore": [
+                0.138978,
+                0.180511,
+                0.242013,
+                0.319489,
+                0.315096,
+                0.238419
+              ]
+            },
+            "FBMP F0.25": {
+              "matchScore": [
+                0.062241,
+                0.101753,
+                0.242201,
+                0.383121,
+                0.408338,
+                0.38014
+              ],
+              "tapaScore": [
+                0.151358,
+                0.203674,
+                0.257188,
+                0.29992,
+                0.297524,
+                0.267173
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sanity": {
+    "metrics": [
+      {
+        "name": "FMS",
+        "label": "FMS",
+        "passes": false,
+        "blurb": "Feature Monosemanticity Score is insensitive to whether features are semantically grounded \u2014 untrained and random SAEs score as high as trained ones.",
+        "cub": [
+          0.3168,
+          0.3233,
+          0.2704
+        ],
+        "coco": [
+          0.6239,
+          0.4699,
+          0.3476
+        ]
+      },
+      {
+        "name": "MS",
+        "label": "Monosemanticity",
+        "passes": false,
+        "blurb": "Monosemanticity measures average activation entropy but does not distinguish random sparse codes from concept-aligned ones.",
+        "cub": [
+          0.6981,
+          0.6854,
+          0.6851
+        ],
+        "coco": [
+          0.5225,
+          0.4959,
+          0.4958
+        ]
+      },
+      {
+        "name": "CKNNA",
+        "label": "CKNNA",
+        "passes": false,
+        "blurb": "Concept-KNN Alignment captures neighbourhood overlap with concept labels, but untrained and random SAEs achieve comparable scores.",
+        "cub": [
+          0.2031,
+          0.6644,
+          0.0007
+        ],
+        "coco": [
+          0.6128,
+          0.7645,
+          0.0021
+        ]
+      },
+      {
+        "name": "MATCHScore",
+        "label": "MATCHScore (F1)",
+        "passes": true,
+        "blurb": "MATCHScore (one-to-one F1) clearly separates trained SAEs from untrained and random baselines.",
+        "cub": [
+          0.2594,
+          0.2301,
+          0.1559
+        ],
+        "coco": [
+          0.543,
+          0.1928,
+          0.0831
+        ]
+      },
+      {
+        "name": "FBMP_MATCHScore",
+        "label": "\u0394MATCHScore (FBMP F0.5)",
+        "passes": true,
+        "blurb": "FBMP-based \u0394MATCHScore (\u03b2=0.5) handles feature-splitting via coalitions and clearly distinguishes trained from untrained/random SAEs.",
+        "cub": [
+          0.2902,
+          0.2429,
+          0.1712
+        ],
+        "coco": [
+          0.5521,
+          0.199,
+          0.085
+        ]
+      },
+      {
+        "name": "TAPAScore",
+        "label": "TAPAScore (FBMP F0.5)",
+        "passes": true,
+        "blurb": "TAPAScore validates causal alignment: matched latents must respond correctly when the corresponding attribute is added or removed. Untrained and random SAEs score near zero.",
+        "cub": [
+          0.4554,
+          -0.0236,
+          0.0051
+        ],
+        "coco": [
+          0.27,
+          -0.0083,
+          -0.0037
+        ]
+      }
+    ]
+  },
+  "correlation": {
+    "CUB": {
+      "F1 (k=1)": {
+        "r": 0.2729,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.031435,
+            "tapa": 0.43367
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.041918,
+            "tapa": 0.454143
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.055099,
+            "tapa": 0.343073
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": -0.000692,
+            "tapa": 0.285032
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.010293,
+            "tapa": 0.326287
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.008016,
+            "tapa": 0.263212
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.037061,
+            "tapa": 0.368274
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.062405,
+            "tapa": 0.393455
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.014668,
+            "tapa": 0.319809
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.012748,
+            "tapa": 0.292874
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.018522,
+            "tapa": 0.362768
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.001526,
+            "tapa": 0.281964
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.024465,
+            "tapa": 0.336048
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.043569,
+            "tapa": 0.46861
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.05582,
+            "tapa": 0.30208
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.040827,
+            "tapa": 0.177755
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.045276,
+            "tapa": 0.233862
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.041382,
+            "tapa": 0.336685
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.03095,
+            "tapa": 0.424169
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.026853,
+            "tapa": 0.421412
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.041684,
+            "tapa": 0.494806
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.033236,
+            "tapa": 0.30208
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.034652,
+            "tapa": 0.338407
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.029467,
+            "tapa": 0.231941
+          }
+        ]
+      },
+      "FBMP F1": {
+        "r": 0.4546,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.039614,
+            "tapa": 0.4388
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.048176,
+            "tapa": 0.463689
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.062063,
+            "tapa": 0.386635
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.007473,
+            "tapa": 0.314354
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.013306,
+            "tapa": 0.349812
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.016093,
+            "tapa": 0.337879
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.048464,
+            "tapa": 0.325264
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.076833,
+            "tapa": 0.381231
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.014379,
+            "tapa": 0.295261
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.024646,
+            "tapa": 0.372656
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.027676,
+            "tapa": 0.401296
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.017248,
+            "tapa": 0.335493
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.033031,
+            "tapa": 0.329356
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.051413,
+            "tapa": 0.499279
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.062552,
+            "tapa": 0.393113
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.068328,
+            "tapa": 0.369868
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.066776,
+            "tapa": 0.437744
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.054525,
+            "tapa": 0.401569
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.0373,
+            "tapa": 0.404364
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.034598,
+            "tapa": 0.418002
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.040502,
+            "tapa": 0.494114
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.046415,
+            "tapa": 0.357313
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.045874,
+            "tapa": 0.441933
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.051621,
+            "tapa": 0.409478
+          }
+        ]
+      },
+      "FBMP F0.5": {
+        "r": 0.3959,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.043504,
+            "tapa": 0.480055
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.051796,
+            "tapa": 0.575179
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.071985,
+            "tapa": 0.461984
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.009173,
+            "tapa": 0.339243
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.017894,
+            "tapa": 0.42073
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.019802,
+            "tapa": 0.436413
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.053113,
+            "tapa": 0.351517
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.082205,
+            "tapa": 0.479714
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.019862,
+            "tapa": 0.378452
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.031466,
+            "tapa": 0.403682
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.03542,
+            "tapa": 0.411865
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.022278,
+            "tapa": 0.292533
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.036491,
+            "tapa": 0.372315
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.057296,
+            "tapa": 0.594272
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.072092,
+            "tapa": 0.537675
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.079887,
+            "tapa": 0.479714
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.079968,
+            "tapa": 0.407703
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.064037,
+            "tapa": 0.404069
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.039529,
+            "tapa": 0.509035
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.037929,
+            "tapa": 0.571088
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.046748,
+            "tapa": 0.57211
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.052579,
+            "tapa": 0.404705
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.052247,
+            "tapa": 0.55404
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.057959,
+            "tapa": 0.491988
+          }
+        ]
+      },
+      "FBMP F0.25": {
+        "r": 0.7343,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.043866,
+            "tapa": 0.462325
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.044881,
+            "tapa": 0.551313
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.062099,
+            "tapa": 0.506989
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": -0.004591,
+            "tapa": 0.309581
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.003957,
+            "tapa": 0.306512
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.009596,
+            "tapa": 0.334811
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.044877,
+            "tapa": 0.346062
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.062432,
+            "tapa": 0.518923
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.000761,
+            "tapa": 0.380498
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.014889,
+            "tapa": 0.338902
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.012322,
+            "tapa": 0.311626
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.009056,
+            "tapa": 0.257757
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.036824,
+            "tapa": 0.329697
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.050404,
+            "tapa": 0.652574
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.059635,
+            "tapa": 0.695534
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.062461,
+            "tapa": 0.485169
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.062562,
+            "tapa": 0.427208
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.055087,
+            "tapa": 0.476986
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.04172,
+            "tapa": 0.55029
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.03301,
+            "tapa": 0.42789
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.04237,
+            "tapa": 0.459598
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.045991,
+            "tapa": 0.479714
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.04395,
+            "tapa": 0.476645
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.050232,
+            "tapa": 0.444255
+          }
+        ]
+      }
+    },
+    "COCO": {
+      "F1 (k=1)": {
+        "r": 0.9086,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.199095,
+            "tapa": 0.191693
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.352159,
+            "tapa": 0.222045
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.413943,
+            "tapa": 0.231629
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.424094,
+            "tapa": 0.242412
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.403024,
+            "tapa": 0.241613
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.399221,
+            "tapa": 0.239617
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.282616,
+            "tapa": 0.21246
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.331567,
+            "tapa": 0.21845
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.332899,
+            "tapa": 0.218051
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.354535,
+            "tapa": 0.278754
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.346701,
+            "tapa": 0.25639
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.369378,
+            "tapa": 0.236022
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.200795,
+            "tapa": 0.196086
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.349883,
+            "tapa": 0.220447
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.420867,
+            "tapa": 0.240016
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.418578,
+            "tapa": 0.250799
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.387664,
+            "tapa": 0.23722
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.400668,
+            "tapa": 0.242013
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.061745,
+            "tapa": 0.108626
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.107694,
+            "tapa": 0.13738
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.250365,
+            "tapa": 0.20647
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.378071,
+            "tapa": 0.233626
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.398627,
+            "tapa": 0.248403
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.391379,
+            "tapa": 0.246406
+          }
+        ]
+      },
+      "FBMP F1": {
+        "r": 0.9683,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.201823,
+            "tapa": 0.188898
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.34912,
+            "tapa": 0.232029
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.422149,
+            "tapa": 0.252396
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.437566,
+            "tapa": 0.245208
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.441669,
+            "tapa": 0.246006
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.417614,
+            "tapa": 0.247604
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.277356,
+            "tapa": 0.212859
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.343795,
+            "tapa": 0.22484
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.358947,
+            "tapa": 0.22524
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.39084,
+            "tapa": 0.253594
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.384453,
+            "tapa": 0.251997
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.386187,
+            "tapa": 0.234026
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.203174,
+            "tapa": 0.174521
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.347678,
+            "tapa": 0.226438
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.427296,
+            "tapa": 0.246805
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.435644,
+            "tapa": 0.256789
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.42295,
+            "tapa": 0.241613
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.416992,
+            "tapa": 0.242812
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.062692,
+            "tapa": 0.108626
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.100442,
+            "tapa": 0.136981
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.244718,
+            "tapa": 0.210463
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.387349,
+            "tapa": 0.235623
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.425201,
+            "tapa": 0.248802
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.419906,
+            "tapa": 0.244808
+          }
+        ]
+      },
+      "FBMP F0.5": {
+        "r": 0.8755,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.199891,
+            "tapa": 0.195288
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.352404,
+            "tapa": 0.276757
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.422548,
+            "tapa": 0.329872
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.442896,
+            "tapa": 0.298722
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.450991,
+            "tapa": 0.315495
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.42997,
+            "tapa": 0.255591
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.27911,
+            "tapa": 0.213658
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.349037,
+            "tapa": 0.251597
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.378923,
+            "tapa": 0.279153
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.406243,
+            "tapa": 0.282748
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.411698,
+            "tapa": 0.29992
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.404209,
+            "tapa": 0.299521
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.202458,
+            "tapa": 0.198083
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.349266,
+            "tapa": 0.283946
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.426365,
+            "tapa": 0.327476
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.438879,
+            "tapa": 0.355431
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.434421,
+            "tapa": 0.323083
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.430676,
+            "tapa": 0.258786
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.062254,
+            "tapa": 0.138978
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.102053,
+            "tapa": 0.180511
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.248288,
+            "tapa": 0.242013
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.393071,
+            "tapa": 0.319489
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.433361,
+            "tapa": 0.315096
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.426832,
+            "tapa": 0.238419
+          }
+        ]
+      },
+      "FBMP F0.25": {
+        "r": 0.9258,
+        "points": [
+          {
+            "variant": "batchtopk",
+            "dictSize": 128,
+            "match": 0.200268,
+            "tapa": 0.201677
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 256,
+            "match": 0.353625,
+            "tapa": 0.284345
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 512,
+            "match": 0.423311,
+            "tapa": 0.329073
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 1024,
+            "match": 0.427826,
+            "tapa": 0.315495
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 2048,
+            "match": 0.419695,
+            "tapa": 0.301118
+          },
+          {
+            "variant": "batchtopk",
+            "dictSize": 4096,
+            "match": 0.386624,
+            "tapa": 0.299521
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 128,
+            "match": 0.276422,
+            "tapa": 0.235623
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 256,
+            "match": 0.34197,
+            "tapa": 0.253195
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 512,
+            "match": 0.354515,
+            "tapa": 0.24361
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 1024,
+            "match": 0.358256,
+            "tapa": 0.255591
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 2048,
+            "match": 0.344919,
+            "tapa": 0.258786
+          },
+          {
+            "variant": "matryoshka",
+            "dictSize": 4096,
+            "match": 0.350221,
+            "tapa": 0.271166
+          },
+          {
+            "variant": "topk",
+            "dictSize": 128,
+            "match": 0.202691,
+            "tapa": 0.203674
+          },
+          {
+            "variant": "topk",
+            "dictSize": 256,
+            "match": 0.350315,
+            "tapa": 0.287939
+          },
+          {
+            "variant": "topk",
+            "dictSize": 512,
+            "match": 0.425673,
+            "tapa": 0.323083
+          },
+          {
+            "variant": "topk",
+            "dictSize": 1024,
+            "match": 0.42662,
+            "tapa": 0.336262
+          },
+          {
+            "variant": "topk",
+            "dictSize": 2048,
+            "match": 0.393439,
+            "tapa": 0.295527
+          },
+          {
+            "variant": "topk",
+            "dictSize": 4096,
+            "match": 0.38814,
+            "tapa": 0.304313
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 128,
+            "match": 0.062241,
+            "tapa": 0.151358
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 256,
+            "match": 0.101753,
+            "tapa": 0.203674
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 512,
+            "match": 0.242201,
+            "tapa": 0.257188
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 1024,
+            "match": 0.383121,
+            "tapa": 0.29992
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 2048,
+            "match": 0.408338,
+            "tapa": 0.297524
+          },
+          {
+            "variant": "jumprelu",
+            "dictSize": 4096,
+            "match": 0.38014,
+            "tapa": 0.267173
+          }
+        ]
+      }
+    }
+  }
+}
