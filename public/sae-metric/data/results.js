@@ -354,52 +354,64 @@ window.SAE_DATA = (function () {
   ];
 
   // ────────────────────────────────────────────────────────────────
-  // 6. TAPAScore widget data — 6 pairs with matched-latent activations
-  //    Each pair: zbin (before) and ẑbin (after) for I_add and I_rem.
+  // 6. TAPAScore widget data
+  //    δ_add = max(î_add) − max(z_add),  δ_rem = max(î_rem) − max(z_rem)
+  //    All values ∈ {−1, 0, +1} (binary vectors, max operation).
   // ────────────────────────────────────────────────────────────────
   const tapasPairs = [
+    // ── synCUB — attribute addition + removal ──────────────────────
     {
-      id: "t1", dataset: "synCUB", attr: "breast pattern: solid → spotted",
+      id: "c1", dataset: "synCUB", attr: "breast pattern: solid → spotted",
       pair: datasetPairs[0],
-      Iadd: [0, 1, 0, 0, 1], iadd_after: [1, 1, 0, 0, 1], iadd_labels: ["L142","L17","L88","L240","L9"],
-      Irem: [1, 0, 1, 0, 1], irem_after: [0, 0, 1, 0, 0], irem_labels: ["L33","L201","L77"],
+      Iadd: [0, 0, 0], iadd_after: [1, 0, 1], iadd_labels: ["L142","L17","L88"],
+      // δ_add = max(1,0,1) − max(0,0,0) = 1 − 0 = +1
+      Irem: [1, 1, 0], irem_after: [0, 0, 0], irem_labels: ["L33","L201","L77"],
+      // δ_rem = max(0,0,0) − max(1,1,0) = 0 − 1 = −1
       deltaAdd: 1, deltaRem: -1,
     },
     {
-      id: "t2", dataset: "synCUB", attr: "bill shape: needle → cone",
+      id: "c2", dataset: "synCUB", attr: "bill shape: needle → cone",
       pair: datasetPairs[1],
-      Iadd: [0, 0, 1], iadd_after: [1, 1, 1], iadd_labels: ["L412","L88","L23"],
-      Irem: [1, 1, 0], irem_after: [0, 1, 0], irem_labels: ["L77","L201"],
+      Iadd: [0, 0, 0], iadd_after: [1, 1, 0], iadd_labels: ["L412","L88","L23"],
+      // δ_add = max(1,1,0) − max(0,0,0) = 1 − 0 = +1
+      Irem: [1, 0, 0], irem_after: [0, 0, 0], irem_labels: ["L77","L201","L55"],
+      // δ_rem = max(0,0,0) − max(1,0,0) = 0 − 1 = −1
       deltaAdd: 1, deltaRem: -1,
     },
     {
-      id: "t3", dataset: "synCUB", attr: "throat colour: white → blue",
+      id: "c3", dataset: "synCUB", attr: "throat colour: white → blue",
       pair: datasetPairs[2],
-      Iadd: [0, 1], iadd_after: [1, 1], iadd_labels: ["L301","L18"],
-      Irem: [1, 1, 0], irem_after: [1, 0, 0], irem_labels: ["L66","L120","L9"],
+      Iadd: [0, 0], iadd_after: [0, 1], iadd_labels: ["L301","L18"],
+      // δ_add = max(0,1) − max(0,0) = 1 − 0 = +1
+      Irem: [1, 1], irem_after: [0, 0], irem_labels: ["L66","L120"],
+      // δ_rem = max(0,0) − max(1,1) = 0 − 1 = −1
       deltaAdd: 1, deltaRem: -1,
     },
+    // ── synCOCO — removal only (Δ_add = 0 by definition) ───────────
     {
-      id: "t4", dataset: "synCOCO", attr: "object: bus removed",
+      id: "o1", dataset: "synCOCO", attr: "bus removed",
       pair: datasetPairs[4],
       Iadd: [], iadd_after: [], iadd_labels: [],
-      Irem: [1, 1, 1, 0], irem_after: [0, 0, 0, 0], irem_labels: ["L501","L88","L17"],
+      Irem: [1, 1, 0], irem_after: [0, 0, 0], irem_labels: ["L501","L88","L17"],
+      // δ_rem = max(0,0,0) − max(1,1,0) = 0 − 1 = −1
       deltaAdd: 0, deltaRem: -1,
     },
     {
-      id: "t5", dataset: "synCOCO", attr: "object: frisbee removed",
+      id: "o2", dataset: "synCOCO", attr: "frisbee removed",
       pair: datasetPairs[5],
       Iadd: [], iadd_after: [], iadd_labels: [],
-      Irem: [1, 1, 0], irem_after: [0, 1, 0], irem_labels: ["L221","L312"],
-      deltaAdd: 0, deltaRem: -0.5,
+      Irem: [1, 0, 1], irem_after: [0, 0, 0], irem_labels: ["L221","L312","L55"],
+      // δ_rem = max(0,0,0) − max(1,0,1) = 0 − 1 = −1
+      deltaAdd: 0, deltaRem: -1,
     },
     {
-      id: "t6", dataset: "synCOCO", attr: "object: tennis racket removed",
+      id: "o3", dataset: "synCOCO", attr: "tennis racket removed",
       pair: datasetPairs[7],
       Iadd: [], iadd_after: [], iadd_labels: [],
-      Irem: [1, 1, 1], irem_after: [1, 1, 0], irem_labels: ["L98","L301","L412"],
-      deltaAdd: 0, deltaRem: -0.33,
-      note: "Failure mode: the 'racket' coalition only partially deactivates because the editor also removed the player's arm — the latent that tracked 'arm holding object' stayed on, dragging Δ_rem toward zero.",
+      Irem: [1, 0, 1], irem_after: [1, 0, 1], irem_labels: ["L98","L301","L412"],
+      // δ_rem = max(1,0,1) − max(1,0,1) = 1 − 1 = 0  ← failure: no response
+      deltaAdd: 0, deltaRem: 0,
+      note: "Failure mode: latents matched to 'tennis racket' by FBMP do not deactivate after removal — they appear to encode a confounding co-occurrence ('athlete in action') that persists in the edited frame. max(î_rem) − max(z_rem) = 1 − 1 = 0.",
     },
   ];
 

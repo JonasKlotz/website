@@ -38,7 +38,7 @@ function App() {
             <a href="#tapas">TAPAScore</a>
             <a href="#dashboard">Results</a>
             <a href="#sanity">Sanity</a>
-            <a href="#scatter">Correlation</a>
+            {/* <a href="#scatter">Correlation</a> */}
           </nav>
         </div>
       </header>
@@ -52,7 +52,7 @@ function App() {
         <TAPASSection />
         <DashboardSection />
         <SanitySection />
-        <ScatterSection />
+        {/* <ScatterSection /> */}
         <ConclusionSection />
         <BibSection />
       </main>
