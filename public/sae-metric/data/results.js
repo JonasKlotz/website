@@ -138,7 +138,7 @@ window.SAE_DATA = (function () {
   // 2. Sanity-check data — Fig 4
   // ────────────────────────────────────────────────────────────────
   const sanity = {
-    conditions: ["Trained", "Untrained TopK", "Random"],
+    conditions: ["Trained", "Untrained", "Random"],
     metrics: [
       {
         name: "CKNNA",
@@ -165,17 +165,17 @@ window.SAE_DATA = (function () {
         coco: [0.58, 0.55, 0.53],
       },
       {
-        name: "MATCHScore (F1, k=1)",
+        name: "MATCHScore F₁ (k=1)",
         family: "ours",
-        blurb: "Our one-to-one binary match: each attribute is assigned its best-aligned latent by F1. Drops sharply for untrained and random SAEs.",
+        blurb: "Naïve top-1 matching: each attribute is assigned exactly one latent (k=1) scored by F₁. Drops sharply for untrained and random SAEs.",
         passes: true,
         cub:  [0.22, 0.09, 0.06],
         coco: [0.51, 0.22, 0.15],
       },
       {
-        name: "MATCHScore (FBMP F1)",
+        name: "MATCHScore FBMP (k≤2)",
         family: "ours",
-        blurb: "Many-to-one: each attribute can be reconstructed from a small coalition of latents via Fully-Binary Matching Pursuit. Even more separation than k=1.",
+        blurb: "Multi-latent matching via FBMP: each attribute is covered by a coalition of up to k=2 latents selected greedily by F₁. Stronger separation than the naïve k=1 baseline.",
         passes: true,
         cub:  [0.31, 0.11, 0.07],
         coco: [0.63, 0.26, 0.17],

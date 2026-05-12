@@ -653,9 +653,9 @@
       },
       {
         "name": "MATCHScore",
-        "label": "MATCHScore (F1)",
+        "label": "MATCHScore F1 (k=1)",
         "passes": true,
-        "blurb": "MATCHScore (one-to-one F1) clearly separates trained SAEs from untrained and random baselines.",
+        "blurb": "Naive top-1 matching: each attribute is assigned exactly one latent (k=1) by F1 score. Clearly separates trained SAEs from untrained and random baselines.",
         "cub": [
           0.2594,
           0.2301,
@@ -669,9 +669,9 @@
       },
       {
         "name": "FBMP_MATCHScore",
-        "label": "\u0394MATCHScore (FBMP F0.5)",
+        "label": "MATCHScore FBMP (k=3)",
         "passes": true,
-        "blurb": "FBMP-based \u0394MATCHScore (\u03b2=0.5) handles feature-splitting via coalitions and clearly distinguishes trained from untrained/random SAEs.",
+        "blurb": "Multi-latent matching via FBMP: each attribute is covered by a coalition of k=3 latents selected greedily. Stronger separation than the naive k=1 baseline.",
         "cub": [
           0.2902,
           0.2429,

@@ -54,7 +54,7 @@ function SanitySection() {
                         </span>
                       </div>
                       <div style={{ fontFamily: "var(--serif)", fontSize: 15, fontWeight: 600, marginBottom: 12, minHeight: 38 }}>
-                        {m.name}
+                        {m.label || m.name}
                       </div>
                       {/* bars */}
                       <div style={{ display: "flex", flexDirection: "column", gap: 6, minHeight: 100 }}>
