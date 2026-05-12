@@ -5,18 +5,20 @@ function HeroSection() {
   const [stage, setStage] = useState(0);
   const [focus, setFocus] = useState(null); // 'add' | 'rem' | null
 
-  // latent firing pattern
-  const latentsBefore = [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0];
-  const latentsAfter  = [1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0];
-  const matched = [false, true, false, false, true, false, false, false, false, false, false, false]; // I_add
-  const matchedRem = [false, false, false, false, false, true, false, false, false, false, false, false]; // I_rem
+  // Latent firing pattern — encodes the TAPAScore logic:
+  // Original: I_rem latents (idx 5) are ON (solid belly present), I_add latents (idx 1,4) are OFF
+  // Perturbed: I_rem latents go OFF, I_add latents turn ON; unmatched latents (idx 0,3,8) also change
+  const latentsBefore = [0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0];
+  const latentsAfter  = [0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0];
+  const matched    = [false, true,  false, false, true,  false, false, false, false, false, false, false]; // I_add
+  const matchedRem = [false, false, false, false, false, true,  false, false, false, false, false, false]; // I_rem
   const showAfter = stage >= 2;
   const showMatch = stage >= 1;
   const showScore = stage >= 3;
 
   // δ readouts
-  const deltaAdd = showScore ? 0.86 : 0;
-  const deltaRem = showScore ? -0.74 : 0;
+  const deltaAdd = showScore ? 1.0 : 0;
+  const deltaRem = showScore ? -1.0 : 0;
   const tapas = (deltaAdd - deltaRem);
 
   const labels = ["Encode", "Match", "Perturb", "Score"];
@@ -117,7 +119,7 @@ function HeroSection() {
                   <div className="label">SAE latents (12 of L)</div>
                   <HeroLatents
                     before={latentsBefore}
-                    after={showAfter ? latentsAfter : latentsBefore}
+                    after={latentsAfter}
                     matched={showMatch ? matched : Array(12).fill(false)}
                     matchedRem={showMatch ? matchedRem : Array(12).fill(false)}
                     showAfter={showAfter}
@@ -129,14 +131,14 @@ function HeroSection() {
                     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", minHeight: 28 }}>
                       <ConceptTag
                         kind="add"
-                        label={<>I<sub>add</sub> · &ldquo;striped belly pattern&rdquo;</>}
+                        label={<>latents matched to the added concept: &ldquo;striped belly pattern&rdquo;</>}
                         visible={showMatch}
                         active={focus === "add"}
                         onClick={() => setFocus(focus === "add" ? null : "add")}
                       />
                       <ConceptTag
                         kind="rem"
-                        label={<>I<sub>rem</sub> · &ldquo;solid belly pattern&rdquo;</>}
+                        label={<>latents matched to the removed concept: &ldquo;solid belly pattern&rdquo;</>}
                         visible={showMatch}
                         active={focus === "rem"}
                         onClick={() => setFocus(focus === "rem" ? null : "rem")}
@@ -206,10 +208,13 @@ function HeroSection() {
 
 function ConceptTag({ kind, label, visible, active, onClick }) {
   const isAdd = kind === "add";
-  const color = isAdd ? "var(--accent)" : "var(--neg)";
+  const color = isAdd ? "var(--pos)" : "var(--neg)";
+  const bgBase = isAdd
+    ? "color-mix(in oklab, var(--pos) 10%, var(--card))"
+    : "color-mix(in oklab, var(--neg) 10%, var(--card))";
   const bgActive = isAdd
-    ? "color-mix(in oklab, var(--accent) 14%, var(--card))"
-    : "color-mix(in oklab, var(--neg) 12%, var(--card))";
+    ? "color-mix(in oklab, var(--pos) 18%, var(--card))"
+    : "color-mix(in oklab, var(--neg) 16%, var(--card))";
   return (
     <button
       onClick={onClick}
@@ -219,9 +224,9 @@ function ConceptTag({ kind, label, visible, active, onClick }) {
         opacity: visible ? 1 : 0.15,
         transition: "all 240ms",
         cursor: visible ? "pointer" : "default",
-        color: isAdd ? "var(--accent-ink)" : "var(--neg)",
-        borderColor: active ? color : "var(--rule)",
-        background: active ? bgActive : "var(--card)",
+        color,
+        borderColor: visible ? color : "var(--rule)",
+        background: active ? bgActive : (visible ? bgBase : "var(--card)"),
         boxShadow: active ? "0 0 0 1px " + color : "none",
         fontFamily: "var(--sans)",
         fontSize: 13,
@@ -243,22 +248,26 @@ function HeroLatents({ before, after, matched, matchedRem, showAfter, focus }) {
             const isAdd = matched[i], isRem = matchedRem[i];
             const dim = (isAdd && dimAdd) || (isRem && dimRem);
             const emph = (isAdd && focus === "add") || (isRem && focus === "rem");
+            const bg = isAdd
+              ? (v ? "color-mix(in oklab, var(--pos) 72%, var(--card))" : "color-mix(in oklab, var(--pos) 16%, var(--card))")
+              : isRem
+              ? (v ? "color-mix(in oklab, var(--neg) 72%, var(--card))" : "color-mix(in oklab, var(--neg) 16%, var(--card))")
+              : undefined;
             return (
-              <div key={i} className={`bincell ${v ? "on" : ""}`} style={{
+              <div key={i} className={`bincell ${v && !isAdd && !isRem ? "on" : ""}`} style={{
                 width: 28, height: 28,
-                outline: isAdd ? `${emph ? 3 : 2}px solid var(--accent)` :
-                          isRem ? `${emph ? 3 : 2}px solid var(--neg)` : "none",
-                outlineOffset: emph ? 2 : 1,
-                opacity: focus && !isAdd && !isRem ? 0.45 : 1,
-                filter: dim ? "saturate(0.4)" : "none",
-                boxShadow: emph ? (isAdd ? "0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent)" : "0 0 0 4px color-mix(in oklab, var(--neg) 22%, transparent)") : "none",
+                background: bg,
+                borderColor: isAdd ? "var(--pos)" : isRem ? "var(--neg)" : undefined,
+                color: (isAdd || isRem) ? (v ? "#fff" : isAdd ? "var(--pos)" : "var(--neg)") : undefined,
+                opacity: focus && !isAdd && !isRem ? 0.45 : dim ? 0.4 : 1,
+                boxShadow: emph ? (isAdd ? "0 0 0 4px color-mix(in oklab, var(--pos) 28%, transparent)" : "0 0 0 4px color-mix(in oklab, var(--neg) 28%, transparent)") : "none",
                 transition: "all 300ms",
               }}>{v}</div>
             );
           })}
         </div>
       </div>
-      <div style={{ display: "flex", gap: 14, alignItems: "center", opacity: showAfter ? 1 : 0.2, transition: "opacity 400ms" }}>
+      <div style={{ display: "flex", gap: 14, alignItems: "center", opacity: showAfter ? 1 : 0.35, transition: "opacity 400ms" }}>
         <div style={{ minWidth: 100, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)" }}>ẑ<sub>bin</sub></div>
         <div style={{ display: "flex", gap: 4 }}>
           {after.map((v, i) => {
@@ -266,18 +275,19 @@ function HeroLatents({ before, after, matched, matchedRem, showAfter, focus }) {
             const isAdd = matched[i], isRem = matchedRem[i];
             const dim = (isAdd && dimAdd) || (isRem && dimRem);
             const emph = (isAdd && focus === "add") || (isRem && focus === "rem");
+            const bg = isAdd
+              ? (v ? "color-mix(in oklab, var(--pos) 72%, var(--card))" : "color-mix(in oklab, var(--pos) 16%, var(--card))")
+              : isRem
+              ? (v ? "color-mix(in oklab, var(--neg) 72%, var(--card))" : "color-mix(in oklab, var(--neg) 16%, var(--card))")
+              : (changed && v ? "var(--accent)" : undefined);
             return (
-              <div key={i} className={`bincell ${v ? "on" : ""}`} style={{
+              <div key={i} className={`bincell ${v && !isAdd && !isRem && !changed ? "on" : ""}`} style={{
                 width: 28, height: 28,
-                outline: isAdd ? `${emph ? 3 : 2}px solid var(--accent)` :
-                          isRem ? `${emph ? 3 : 2}px solid var(--neg)` : "none",
-                outlineOffset: emph ? 2 : 1,
-                opacity: focus && !isAdd && !isRem ? 0.45 : 1,
-                filter: dim ? "saturate(0.4)" : "none",
-                background: changed && v ? "var(--accent)" : undefined,
-                borderColor: changed && v ? "var(--accent)" : undefined,
-                color: changed && v ? "#fff" : undefined,
-                boxShadow: emph ? (isAdd ? "0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent)" : "0 0 0 4px color-mix(in oklab, var(--neg) 22%, transparent)") : "none",
+                background: bg,
+                borderColor: isAdd ? "var(--pos)" : isRem ? "var(--neg)" : (changed && v ? "var(--accent)" : undefined),
+                color: (isAdd || isRem) ? (v ? "#fff" : isAdd ? "var(--pos)" : "var(--neg)") : (changed && v ? "#fff" : undefined),
+                opacity: focus && !isAdd && !isRem ? 0.45 : dim ? 0.4 : 1,
+                boxShadow: emph ? (isAdd ? "0 0 0 4px color-mix(in oklab, var(--pos) 28%, transparent)" : "0 0 0 4px color-mix(in oklab, var(--neg) 28%, transparent)") : "none",
                 transition: "all 300ms",
               }}>{v}</div>
             );
