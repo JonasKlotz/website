@@ -46,11 +46,15 @@ const projects = (await getCollection('projects')).sort(
     <div class="section-divider" />
   </div>
   <footer
-    class="max-w-content mx-auto px-6 md:px-10 py-8"
+    class="max-w-content mx-auto px-6 md:px-10 py-8 flex flex-wrap items-center justify-between gap-4"
     style="max-width:52rem"
   >
     <p class="font-mono text-xs" style="color:var(--ink-faint); letter-spacing:0.06em">
       © {year} Jonas Klotz
     </p>
+    <nav class="flex gap-5 font-mono text-xs" style="color:var(--ink-faint);letter-spacing:0.06em">
+      <a href="/impressum" class="no-anim hover:text-amber transition-colors duration-200" style="color:var(--ink-faint);text-decoration:none">Impressum</a>
+      <a href="/datenschutz" class="no-anim hover:text-amber transition-colors duration-200" style="color:var(--ink-faint);text-decoration:none">Datenschutz</a>
+    </nav>
   </footer>
 </Base>
