@@ -131,14 +131,14 @@ function HeroSection() {
                     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", minHeight: 28 }}>
                       <ConceptTag
                         kind="add"
-                        label={<>latents matched to the added concept: &ldquo;striped belly pattern&rdquo;</>}
+                        label={<>matched concept: &ldquo;striped belly pattern&rdquo;{showAfter && <> <span style={{ opacity: 0.65 }}>(added)</span></>}</>}
                         visible={showMatch}
                         active={focus === "add"}
                         onClick={() => setFocus(focus === "add" ? null : "add")}
                       />
                       <ConceptTag
                         kind="rem"
-                        label={<>latents matched to the removed concept: &ldquo;solid belly pattern&rdquo;</>}
+                        label={<>matched concept: &ldquo;solid belly pattern&rdquo;{showAfter && <> <span style={{ opacity: 0.65 }}>(removed)</span></>}</>}
                         visible={showMatch}
                         active={focus === "rem"}
                         onClick={() => setFocus(focus === "rem" ? null : "rem")}
@@ -230,6 +230,7 @@ function ConceptTag({ kind, label, visible, active, onClick }) {
         boxShadow: active ? "0 0 0 1px " + color : "none",
         fontFamily: "var(--sans)",
         fontSize: 13,
+        whiteSpace: "nowrap",
       }}
       aria-pressed={active}
     >{label}</button>
@@ -242,7 +243,7 @@ function HeroLatents({ before, after, matched, matchedRem, showAfter, focus }) {
   return (
     <div style={{ marginTop: 8 }}>
       <div style={{ display: "flex", gap: 14, alignItems: "center", marginBottom: 6 }}>
-        <div style={{ minWidth: 100, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)" }}>z<sub>bin</sub></div>
+        <div style={{ minWidth: 100, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)" }}>z<sub>bin</sub> <span style={{ fontFamily: "var(--sans)", letterSpacing: 0, textTransform: "none" }}>(original)</span></div>
         <div style={{ display: "flex", gap: 4 }}>
           {before.map((v, i) => {
             const isAdd = matched[i], isRem = matchedRem[i];
@@ -268,7 +269,7 @@ function HeroLatents({ before, after, matched, matchedRem, showAfter, focus }) {
         </div>
       </div>
       <div style={{ display: "flex", gap: 14, alignItems: "center", opacity: showAfter ? 1 : 0.35, transition: "opacity 400ms" }}>
-        <div style={{ minWidth: 100, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)" }}>ẑ<sub>bin</sub></div>
+        <div style={{ minWidth: 100, fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)" }}>ẑ<sub>bin</sub> <span style={{ fontFamily: "var(--sans)", letterSpacing: 0, textTransform: "none" }}>(perturbed)</span></div>
         <div style={{ display: "flex", gap: 4 }}>
           {after.map((v, i) => {
             const changed = showAfter && v !== before[i];
