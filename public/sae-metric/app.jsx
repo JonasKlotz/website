@@ -63,6 +63,10 @@ function App() {
             <div className="brand">TAPAS</div>
             <div className="small mt-1">An interactive companion to an anonymous submission.</div>
           </div>
+          <nav style={{display:"flex",gap:20,alignItems:"flex-end",fontFamily:"var(--mono)",fontSize:11,letterSpacing:"0.08em",color:"var(--ink-3)"}}>
+            <a href="/impressum" style={{color:"var(--ink-3)",textDecoration:"none"}} onMouseEnter={e=>e.target.style.color="var(--accent)"} onMouseLeave={e=>e.target.style.color="var(--ink-3)"}>Impressum</a>
+            <a href="/datenschutz" style={{color:"var(--ink-3)",textDecoration:"none"}} onMouseEnter={e=>e.target.style.color="var(--accent)"} onMouseLeave={e=>e.target.style.color="var(--ink-3)"}>Datenschutz</a>
+          </nav>
         </div>
       </footer>
 
