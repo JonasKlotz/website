@@ -81,7 +81,7 @@ function DashboardSection() {
             </div>
 
             <div className="panel-pad">
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 200px", gap: 24 }}>
+              <div className="dashboard-grid" style={{ gap: 24 }}>
                 <svg width={W} height={H} style={{ maxWidth: "100%" }}>
                   {/* gridlines at y-tick positions */}
                   {yTicks.map(t => (

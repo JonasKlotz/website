@@ -144,7 +144,7 @@ function FBMPSection() {
             </div>
             <div className="panel-pad">
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: 32 }}>
+              <div className="fbmp-grid" style={{ gap: 32 }}>
 
                 {/* LEFT: data view */}
                 <div>
@@ -153,11 +153,11 @@ function FBMPSection() {
                       {/* target */}
                       <Binrow vec={target} label="Target y" sub="ground-truth attribute" />
                       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                        <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
+                        <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
                           Residual r<sub>{curStep}</sub>
                           <div className="dim" style={{ fontSize: 10, marginTop: 2 }}>r ← r ∧ ¬z*</div>
                         </div>
-                        <div className="bingrid" style={{ gridAutoColumns: "22px" }}>
+                        <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                           {currentResidual.map((v, i) =>
                         <div key={i} className={`bincell ${v ? "on" : ""}`} style={{
                           outline: v ? "1.5px dashed var(--accent)" : "none",
@@ -182,11 +182,11 @@ function FBMPSection() {
                           background: isJustPicked ? "color-mix(in oklab, var(--accent) 8%, transparent)" : "transparent",
                           borderRadius: 4
                         }}>
-                            <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
+                            <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: isJustPicked ? "var(--accent)" : "var(--ink-2)" }}>
                               {l.label}
                               {isPicked && <span className="tag accent" style={{ marginLeft: 8, fontSize: 10, padding: "1px 6px" }}>picked</span>}
                             </div>
-                            <div className="bingrid" style={{ gridAutoColumns: "22px" }}>
+                            <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                               {l.z.map((v, j) =>
                             <div key={j} className={`bincell ${v ? "on" : ""}`}>{v}</div>
                             )}
@@ -202,11 +202,11 @@ function FBMPSection() {
 
                       {/* coalition approx */}
                       <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                        <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
+                        <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
                           Approx ŷ<sub>{curStep}</sub>
                           <div className="dim" style={{ fontSize: 10, marginTop: 2 }}>ŷ ← ŷ ∨ z*</div>
                         </div>
-                        <div className="bingrid" style={{ gridAutoColumns: "22px" }}>
+                        <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                           {currentApprox.map((v, i) =>
                         <Bincell key={i} v={v} kind={annotateKinds(target, currentApprox)[i]} />
                         )}
@@ -227,10 +227,10 @@ function FBMPSection() {
                       </div>
                       {naiveTopK.map((r, i) =>
                     <div key={r.i} style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                          <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
+                          <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
                             #{i + 1} {r.label}
                           </div>
-                          <div className="bingrid" style={{ gridAutoColumns: "22px" }}>
+                          <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                             {r.z.map((v, j) => <div key={j} className={`bincell ${v ? "on" : ""}`}>{v}</div>)}
                           </div>
                           <div style={{ fontFamily: "var(--mono)", fontSize: 11, color: "var(--ink-3)", marginLeft: 8 }}>
@@ -239,8 +239,8 @@ function FBMPSection() {
                         </div>
                     )}
                       <div style={{ display: "flex", gap: 14, alignItems: "center", marginTop: 10, paddingTop: 10, borderTop: "1px solid var(--rule-soft)" }}>
-                        <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12 }}>OR of top-{naiveK}</div>
-                        <div className="bingrid" style={{ gridAutoColumns: "22px" }}>
+                        <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12 }}>OR of top-{naiveK}</div>
+                        <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                           {naiveApprox.map((v, i) =>
                         <Bincell key={i} v={v} kind={annotateKinds(target, naiveApprox)[i]} />
                         )}
@@ -304,7 +304,7 @@ return S`}
 
                   <h4 className="mt-3">Try it</h4>
                   <p className="small">Click cells in the target row to flip them, then step through again.</p>
-                  <div className="bingrid" style={{ gridAutoColumns: "22px", marginTop: 6 }}>
+                  <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)", marginTop: 6 }}>
                     {target.map((v, i) =>
                     <button key={i} onClick={() => toggleTarget(i)}
                     className={`bincell ${v ? "on" : ""}`}

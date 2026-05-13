@@ -21,12 +21,13 @@
 
 /* ─── Base ────────────────────────────────────────────────────── */
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   body {
     background-color: var(--surface);
     color: var(--ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   /* Underline animation for links */
@@ -217,7 +218,7 @@ body::before {
 /* Tablet: 3-col (venue | divider | content), hide figure */
 @media (min-width: 640px) and (max-width: 1023px) {
   .pub-entry {
-    grid-template-columns: 5.5rem 2.5rem 1fr;
+    grid-template-columns: 5.5rem 2.5rem minmax(0, 1fr);
     gap: 0;
     padding: 2rem 0;
   }

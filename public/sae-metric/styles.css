@@ -5,6 +5,7 @@
 :root {
   /* tweakables (Tweaks panel writes back through __edit_mode_set_keys) */
   --serif: "Source Serif 4", "Source Serif Pro", "Iowan Old Style", Georgia, serif;
+  --bincell: 22px;
   --sans:  "Inter Tight", "Söhne", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
   --mono:  "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -35,7 +36,7 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html, body { margin: 0; padding: 0; overflow-x: hidden; }
 body {
   font-family: var(--serif);
   font-size: 19px;
@@ -209,7 +210,7 @@ a:hover { color: var(--accent); }
 /* ── Binary cell grid (used by FBMP + TAPAS) ─────────────────── */
 .bingrid { display: grid; grid-auto-flow: column; gap: 3px; }
 .bincell {
-  width: 22px; height: 22px;
+  width: var(--bincell); height: var(--bincell);
   border: 1px solid var(--rule);
   background: var(--card);
   border-radius: 2px;
@@ -311,4 +312,51 @@ footer.foot .page { display: flex; justify-content: space-between; flex-wrap: wr
   .page { padding: 0 20px; }
   section { padding: 60px 0; }
   .row { flex-direction: column; }
+}
+
+/* ── Component layout defaults (overridden at mobile breakpoints) ── */
+.hero-stage-inner { padding: 28px 32px 40px; }
+.binrow-label     { min-width: 160px; }
+.seg button.lg    { padding: 10px 18px; }
+.fbmp-grid        { display: grid; grid-template-columns: 1fr 280px; }
+.dashboard-grid   { display: grid; grid-template-columns: 1fr 200px; }
+.tapas-main-grid            { display: grid; grid-template-columns: 1fr 1fr 240px; }
+.tapas-main-grid.tapas-coco { grid-template-columns: 1fr 1fr 200px; }
+.tapas-delta-grid            { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.tapas-delta-grid.tapas-coco { grid-template-columns: 1fr 1fr; }
+.tapas-footer-2col { display: grid; grid-template-columns: 1fr 1fr; }
+.tapas-footer-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+
+/* ── Mobile: 640px and below ─────────────────────────────────── */
+@media (max-width: 640px) {
+  :root { --bincell: 18px; }
+  body { font-size: 16px; }
+  h1 { font-size: 32px; }
+  h2 { font-size: 24px; }
+  .page { padding: 0 16px; }
+  section { padding: calc(36px * var(--density)) 0; }
+  .topbar-inner { padding: 12px 16px; }
+  .topbar nav { display: none; }
+  .hero-stage-inner { padding: 16px 14px 24px; }
+  .seg button { padding: 6px 8px; font-size: 11px; }
+  .bincell { font-size: 10px; }
+  .binrow-label { min-width: 80px; }
+  .fbmp-grid { grid-template-columns: 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .tapas-main-grid,
+  .tapas-main-grid.tapas-coco { grid-template-columns: 1fr 1fr; }
+  .tapas-sidebar { grid-column: 1 / -1; }
+  .tapas-delta-grid { grid-template-columns: 1fr 1fr; }
+  .tapas-footer-3col,
+  .tapas-footer-2col { grid-template-columns: 1fr; }
+  .panel-pad { padding: 16px 14px; }
+  .panel-hd  { padding: 12px 14px; flex-wrap: wrap; gap: 8px; }
+}
+
+/* ── Very small phones: 480px and below ─────────────────────────── */
+@media (max-width: 480px) {
+  .tapas-main-grid,
+  .tapas-main-grid.tapas-coco { grid-template-columns: 1fr; }
+  .tapas-delta-grid,
+  .tapas-delta-grid.tapas-coco { grid-template-columns: 1fr; }
 }

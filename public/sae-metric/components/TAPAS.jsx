@@ -116,11 +116,10 @@ function TAPASSection() {
             </div>
 
             <div className="panel-pad">
-              <div style={{
-                display: "grid",
-                gridTemplateColumns: isCOCO ? "1fr 1fr 200px" : "1fr 1fr 240px",
-                gap: 28,
-              }}>
+              <div
+                className={isCOCO ? "tapas-main-grid tapas-coco" : "tapas-main-grid"}
+                style={{ gap: 28 }}
+              >
                 {/* Base image */}
                 <div>
                   <div className="label">Original</div>
@@ -141,7 +140,7 @@ function TAPASSection() {
                 </div>
 
                 {/* Latent columns */}
-                <div>
+                <div className="tapas-sidebar">
                   {!isCOCO && (
                     <div style={{ marginBottom: 14 }}>
                       <h4 style={{ marginBottom: 6 }}>I<sub>add</sub> · added latents</h4>
@@ -158,11 +157,7 @@ function TAPASSection() {
               </div>
 
               {/* Per-pair δ tiles */}
-              <div className="mt-3" style={{
-                display: "grid",
-                gridTemplateColumns: isCOCO ? "1fr 1fr" : "1fr 1fr 1fr",
-                gap: 16,
-              }}>
+              <div className={"mt-3 tapas-delta-grid" + (isCOCO ? " tapas-coco" : "")} style={{ gap: 16 }}>
                 {!isCOCO && (
                   <DeltaTile label="δ_add" value={p.deltaAdd} active={showAfter}
                     sub="max ẑ − max z  over I_add" pos />
@@ -189,7 +184,7 @@ function TAPASSection() {
             {/* Running-average footer */}
             <div style={{ padding: "16px 28px", borderTop: "1px solid var(--rule-soft)", background: "var(--paper-2)" }}>
               {isCOCO ? (
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, alignItems: "center" }}>
+                <div className="tapas-footer-2col" style={{ gap: 16, alignItems: "center" }}>
                   <AccumBar label="Δ_rem" value={dRem} n={allRem.length} N={pairs.length} />
                   <ScoreBox
                     formula={<>TAPAScore = 0 − Δ<sub>rem</sub></>}
@@ -198,7 +193,7 @@ function TAPASSection() {
                   />
                 </div>
               ) : (
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16, alignItems: "center" }}>
+                <div className="tapas-footer-3col" style={{ gap: 16, alignItems: "center" }}>
                   <AccumBar label="Δ_add" value={dAdd} n={allAdd.length} N={pairs.length} pos />
                   <AccumBar label="Δ_rem" value={dRem} n={allRem.length} N={pairs.length} />
                   <ScoreBox

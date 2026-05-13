@@ -49,7 +49,7 @@ function HeroSection() {
 
     <section style={{ paddingTop: 16, borderTop: 0 }}>
       <div className="page">
-            <div className="hero-stage" style={{ padding: "28px 32px 40px", minHeight: 540 }}>
+            <div className="hero-stage hero-stage-inner" style={{ minHeight: 540 }}>
               <div className="stage-chip">
                 STAGE {stage + 1} / 4 — {["ENCODE", "MATCH", "PERTURB", "SCORE"][stage]}
               </div>
@@ -77,9 +77,9 @@ function HeroSection() {
                 <div className="seg" style={{ boxShadow: "var(--shadow-1)" }}>
                   {labels.map((l, i) => (
                     <button key={l}
-                            className={stage === i ? "on" : ""}
+                            className={"lg " + (stage === i ? "on" : "")}
                             onClick={() => setStage(i)}
-                            style={{ fontSize: 13, padding: "10px 18px", fontWeight: 500 }}>
+                            style={{ fontSize: 13, fontWeight: 500 }}>
                       <span style={{ fontFamily: "var(--mono)", marginRight: 6, opacity: 0.55 }}>{i + 1}</span>{l}
                     </button>
                   ))}

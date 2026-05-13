@@ -11,7 +11,7 @@ function Bincell({ v, kind, size = 22 }) {
   if (kind) cls.push(kind);
   else if (v) cls.push("on");
   return (
-    <div className={cls.join(" ")} style={{ width: size, height: size }}>
+    <div className={cls.join(" ")} style={size !== 22 ? { width: size, height: size } : undefined}>
       {v ? 1 : 0}
     </div>
   );
@@ -21,12 +21,12 @@ function Binrow({ vec, kinds, size = 22, label, sub }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
       {label !== undefined && (
-        <div style={{ minWidth: 160, fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
+        <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-2)" }}>
           {label}
           {sub && <div className="dim" style={{ fontSize: 10, marginTop: 2 }}>{sub}</div>}
         </div>
       )}
-      <div className="bingrid" style={{ gridAutoColumns: `${size}px` }}>
+      <div className="bingrid" style={{ gridAutoColumns: size !== 22 ? `${size}px` : "var(--bincell)" }}>
         {vec.map((v, i) => (
           <Bincell key={i} v={v} kind={kinds ? kinds[i] : undefined} size={size} />
         ))}

@@ -9,7 +9,9 @@
     >
       Jonas Klotz
     </a>
-    <nav class="flex gap-6 font-mono text-xs font-medium uppercase tracking-widest" style="color:var(--ink-muted)">
+
+    <!-- Desktop nav (hidden on mobile) -->
+    <nav class="hidden sm:flex gap-6 font-mono text-xs font-medium uppercase tracking-widest" style="color:var(--ink-muted)">
       <a href="#publications" class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Publications</a>
       <a href="#projects"     class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Projects</a>
       <div class="relative group">
@@ -31,5 +33,49 @@
       </div>
       <a href="mailto:j.klotz@tu-berlin.de" class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Contact</a>
     </nav>
+
+    <!-- Hamburger button (mobile only) -->
+    <button
+      id="nav-hamburger"
+      class="flex sm:hidden flex-col justify-center gap-1.5 w-8 h-8 -mr-1 focus:outline-none"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >
+      <span class="nav-bar block h-px w-5 transition-transform duration-200" style="background:var(--ink-muted)"></span>
+      <span class="nav-bar block h-px w-5 transition-opacity duration-200" style="background:var(--ink-muted)"></span>
+      <span class="nav-bar block h-px w-5 transition-transform duration-200" style="background:var(--ink-muted)"></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div
+    id="nav-mobile"
+    class="hidden sm:hidden"
+    style="border-top:1px solid var(--line);margin-top:0.75rem;padding-top:0.75rem"
+  >
+    <nav class="flex flex-col gap-4 font-mono text-xs font-medium uppercase tracking-widest pb-4" style="color:var(--ink-muted)">
+      <a href="#publications" class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Publications</a>
+      <a href="#projects"     class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Projects</a>
+      <a href="/sae-metric"   class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Paper Sites — TAPAS</a>
+      <a href="mailto:j.klotz@tu-berlin.de" class="no-anim hover:text-amber transition-colors duration-200" style="text-decoration:none">Contact</a>
+    </nav>
   </div>
 </header>
+
+<script>
+  const btn = document.getElementById('nav-hamburger');
+  const menu = document.getElementById('nav-mobile');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+    document.querySelectorAll('#nav-mobile a').forEach(a =>
+      a.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      })
+    );
+  }
+</script>
