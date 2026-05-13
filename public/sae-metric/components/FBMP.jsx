@@ -323,7 +323,7 @@ return S`}
                 <span style={{ fontFamily: "var(--mono)", fontSize: 28, color: maxStep > 0 ? "var(--accent)" : "var(--ink-3)" }}>
                   {maxStep > 0 ? finalF1.toFixed(2) : "—"}
                 </span>
-                {maxStep > 0 && <span className="small">{trajectory.map(t => t.pickedLabel.replace(/L#\d+ · /, "")).join(" + ")}</span>}
+                {maxStep > 0 && <span className="small">{trajectory.map(t => t.pickedLabel).join(" + ")}</span>}
               </div>
             </div>
             <div style={{ width: 1, height: 40, background: "var(--rule)" }} />
@@ -333,7 +333,7 @@ return S`}
                 <span style={{ fontFamily: "var(--mono)", fontSize: 28, color: "var(--ink-3)" }}>
                   {f1Stats(target, naiveApprox).F1.toFixed(2)}
                 </span>
-                <span className="small">F1 · {naiveTopK.map(r => r.label.replace(/L#\d+ · /, "")).join(" + ")}</span>
+                <span className="small">F1 · {naiveTopK.map(r => r.label).join(" + ")}</span>
               </div>
             </div>
           </div>

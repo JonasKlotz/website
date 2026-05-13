@@ -235,10 +235,10 @@ window.SAE_DATA = (function () {
     target: [1,1,1,1,0,0,0,0,1,1],
     targetLabel: "has yellow head",
     latents: [
-      { id: 0, label: "L#1 · yellow crown",   z: [1,1,1,1,0,0,0,0,0,0] },
-      { id: 1, label: "L#2 · yellow head",    z: [1,1,1,1,0,1,0,0,0,1] },
-      { id: 2, label: "L#3 · bright plumage", z: [0,0,0,0,0,0,0,0,1,1] },
-      { id: 3, label: "L#4 · belly stripe",   z: [0,0,0,0,1,1,1,0,0,0] },
+      { id: 0, label: "L#1", z: [1,1,1,1,0,0,0,0,0,0] },
+      { id: 1, label: "L#2", z: [1,1,1,1,0,1,0,0,0,1] },
+      { id: 2, label: "L#3", z: [0,0,0,0,0,0,0,0,1,1] },
+      { id: 3, label: "L#4", z: [0,0,0,0,1,1,1,0,0,0] },
     ],
   };
 

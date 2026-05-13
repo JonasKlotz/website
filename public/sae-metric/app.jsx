@@ -63,10 +63,6 @@ function App() {
             <div className="brand">TAPAS</div>
             <div className="small mt-1">An interactive companion to an anonymous submission.</div>
           </div>
-          <div className="small">
-            Built with HTML + React. All numbers in the dashboard are demo data —<br />
-            wire <span className="mono">data/results.js</span> to the real JSON to swap in.
-          </div>
         </div>
       </footer>
 
