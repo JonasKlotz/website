@@ -19,6 +19,28 @@ function SanitySection() {
             untrained or replaced with random activations. We compare three conditions across six
             metrics; only MATCHScore and TAPAScore separate trained from random.
           </p>
+          <p>
+            The three state-of-the-art baselines are: Monosemanticity Score (MS){" "}
+            <sup><a href="#ref-pach2025" style={{ color: "var(--accent)", textDecoration: "none" }}>1</a></sup>,{" "}
+            Feature Monosemanticity Score (FMS){" "}
+            <sup><a href="#ref-harle2025" style={{ color: "var(--accent)", textDecoration: "none" }}>2</a></sup>,{" "}
+            and centered kernel nearest-neighbor alignment (CKNNA){" "}
+            <sup><a href="#ref-zaigrajew2025" style={{ color: "var(--accent)", textDecoration: "none" }}>3</a></sup>.
+          </p>
+          <div style={{
+            marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--rule)",
+            fontSize: 12, lineHeight: 1.6, color: "var(--ink-3)", fontFamily: "var(--mono)",
+          }}>
+            <div id="ref-pach2025" style={{ marginBottom: 6 }}>
+              <sup>1</sup> Pach, M., Karthik, S., Bouniot, Q., Belongie, S., Akata, Z.: Sparse autoencoders learn monosemantic features in vision-language models. <em>NeurIPS</em> (2025)
+            </div>
+            <div id="ref-harle2025" style={{ marginBottom: 6 }}>
+              <sup>2</sup> Härle, R., Friedrich, F., Brack, M., Wäldchen, S., Deiseroth, B., Schramowski, P., Kersting, K.: Measuring and guiding monosemanticity. <em>NeurIPS</em> (2025)
+            </div>
+            <div id="ref-zaigrajew2025">
+              <sup>3</sup> Zaigrajew, V., Baniecki, H., Biecek, P.: Interpreting CLIP with hierarchical sparse autoencoders. <em>ICML</em> (2025)
+            </div>
+          </div>
         </div>
 
         <div className="wide mt-3">

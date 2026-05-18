@@ -58,7 +58,7 @@ function TAPASSection() {
   const tapas  = dRem !== null ? dAdd - dRem : null;
 
   return (
-    <section id="tapas">
+    <section id="tapas" style={{ display: "none" }}>
       <div className="page">
         <div className="measure">
           <div className="kicker">§ 4 · Causal validation</div>
@@ -79,8 +79,8 @@ function TAPASSection() {
           </p>
         </div>
 
+        {false && (
         <div className="wide mt-3">
-          {/* Dataset tabs */}
           <div style={{ display: "flex", marginBottom: 16 }}>
             {["synCUB", "synCOCO"].map((ds, i) => (
               <button key={ds} onClick={() => setDataset(ds)} style={{
@@ -98,7 +98,6 @@ function TAPASSection() {
           </div>
 
           <div className="panel">
-            {/* Header */}
             <div className="panel-hd">
               <span>
                 <strong>Pair {idx + 1} / {pairs.length}</strong>
@@ -120,13 +119,11 @@ function TAPASSection() {
                 className={isCOCO ? "tapas-main-grid tapas-coco" : "tapas-main-grid"}
                 style={{ gap: 28 }}
               >
-                {/* Base image */}
                 <div>
                   <div className="label">Original</div>
                   <ImgSlot src={p.pair.base} label="base" />
                 </div>
 
-                {/* Perturbed image with reveal overlay */}
                 <div>
                   <div className="label">Perturbed (synthetic)</div>
                   <div style={{ position: "relative" }}>
@@ -139,7 +136,6 @@ function TAPASSection() {
                   </div>
                 </div>
 
-                {/* Latent columns */}
                 <div className="tapas-sidebar">
                   {!isCOCO && (
                     <div style={{ marginBottom: 14 }}>
@@ -156,7 +152,6 @@ function TAPASSection() {
                 </div>
               </div>
 
-              {/* Per-pair δ tiles */}
               <div className={"mt-3 tapas-delta-grid" + (isCOCO ? " tapas-coco" : "")} style={{ gap: 16 }}>
                 {!isCOCO && (
                   <DeltaTile label="δ_add" value={p.deltaAdd} active={showAfter}
@@ -181,7 +176,6 @@ function TAPASSection() {
               )}
             </div>
 
-            {/* Running-average footer */}
             <div style={{ padding: "16px 28px", borderTop: "1px solid var(--rule-soft)", background: "var(--paper-2)" }}>
               {isCOCO ? (
                 <div className="tapas-footer-2col" style={{ gap: 16, alignItems: "center" }}>
@@ -215,6 +209,7 @@ function TAPASSection() {
             correct direction under targeted attribute perturbations.
           </div>
         </div>
+        )}
       </div>
     </section>
   );
