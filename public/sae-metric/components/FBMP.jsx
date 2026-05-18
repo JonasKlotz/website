@@ -105,41 +105,35 @@ function FBMPSection() {
 
         <div className="wide mt-3">
           <div className="panel">
-            <div className="panel-hd">
-              <span><strong>Target attribute:</strong> <span className="mono">{targetLabel}</span></span>
+            <div className="panel-hd" style={{ justifyContent: "flex-start" }}>
               <div style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
                 <div className="seg">
                   <button className={mode === "fbmp" ? "on" : ""} onClick={() => setMode("fbmp")}>FBMP</button>
                   <button className={mode === "topk" ? "on" : ""} onClick={() => setMode("topk")}>Naïve top-k</button>
                 </div>
-                {mode === "fbmp" && <>
-                  <span className="small">β =</span>
-                  <div className="seg">
-                    {[0.25, 0.5, 1].map((b) =>
-                      <button key={b} className={beta === b ? "on" : ""} onClick={() => {setBeta(b);setStep(0);}}>
-                        F<sub>{b}</sub>
-                      </button>
-                    )}
-                  </div>
-                  <span className="small">k =</span>
-                  <div className="seg">
-                    {[1, 2].map((k) =>
-                      <button key={k} className={maxK === k ? "on" : ""} onClick={() => {setMaxK(k);setStep(0);}}>
-                        {k}
-                      </button>
-                    )}
-                  </div>
-                </>}
-                {mode === "topk" && <>
-                  <span className="small">k =</span>
-                  <div className="seg">
-                    {[1, 3].map((k) =>
-                      <button key={k} className={naiveK === k ? "on" : ""} onClick={() => setNaiveK(k)}>
-                        {k}
-                      </button>
-                    )}
-                  </div>
-                </>}
+                <span className="small" style={{ visibility: mode === "fbmp" ? "visible" : "hidden" }}>β =</span>
+                <div className="seg" style={{ visibility: mode === "fbmp" ? "visible" : "hidden" }}>
+                  {[0.25, 0.5, 1].map((b) =>
+                    <button key={b} className={beta === b ? "on" : ""} onClick={() => {setBeta(b);setStep(0);}}>
+                      F<sub>{b}</sub>
+                    </button>
+                  )}
+                </div>
+                <span className="small">k =</span>
+                <div className="seg">
+                  {mode === "fbmp"
+                    ? [1, 2].map((k) =>
+                        <button key={k} className={maxK === k ? "on" : ""} onClick={() => {setMaxK(k);setStep(0);}}>
+                          {k}
+                        </button>
+                      )
+                    : [1, 3].map((k) =>
+                        <button key={k} className={naiveK === k ? "on" : ""} onClick={() => setNaiveK(k)}>
+                          {k}
+                        </button>
+                      )
+                  }
+                </div>
               </div>
             </div>
             <div className="panel-pad">
@@ -184,7 +178,7 @@ function FBMPSection() {
                         }}>
                             <div className="binrow-label" style={{ fontFamily: "var(--mono)", fontSize: 12, color: isJustPicked ? "var(--accent)" : "var(--ink-2)" }}>
                               {l.label}
-                              {isPicked && <span className="tag accent" style={{ marginLeft: 8, fontSize: 10, padding: "1px 6px" }}>picked</span>}
+                              <span className="tag accent" style={{ marginLeft: 8, fontSize: 10, padding: "1px 6px", visibility: isPicked ? "visible" : "hidden" }}>picked</span>
                             </div>
                             <div className="bingrid" style={{ gridAutoColumns: "var(--bincell)" }}>
                               {l.z.map((v, j) =>
@@ -262,13 +256,11 @@ function FBMPSection() {
                   {mode === "fbmp" &&
                   <div style={{ marginTop: 20 }}>
                     <h4>Step {curStep} of {maxStep}</h4>
-                    {cur &&
-                      <div style={{ background: "var(--paper-2)", padding: 12, border: "1px solid var(--rule)", borderRadius: 4, fontSize: 13, lineHeight: 1.5 }}>
-                        <div>Picked: <strong>{cur.pickedLabel}</strong></div>
-                        <div className="small mt-1">F<sub>{beta}</sub> on residual = {cur.fbetaScore.toFixed(3)}</div>
-                        <div className="small">Joint F1: {cur.f1Before.toFixed(2)} → <strong style={{ color: "var(--pos)" }}>{cur.f1After.toFixed(2)}</strong></div>
-                      </div>
-                    }
+                    <div style={{ background: "var(--paper-2)", padding: 12, border: "1px solid var(--rule)", borderRadius: 4, fontSize: 13, lineHeight: 1.5, visibility: cur ? "visible" : "hidden" }}>
+                      <div>Picked: <strong>{cur ? cur.pickedLabel : "—"}</strong></div>
+                      <div className="small mt-1">F<sub>{beta}</sub> on residual = {cur ? cur.fbetaScore.toFixed(3) : "—"}</div>
+                      <div className="small">Joint F1: {cur ? <>{cur.f1Before.toFixed(2)} → <strong style={{ color: "var(--pos)" }}>{cur.f1After.toFixed(2)}</strong></> : "—"}</div>
+                    </div>
                     <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
                       <button className="btn" onClick={() => setStep(Math.max(0, step - 1))} disabled={curStep === 0}>← prev</button>
                       <button className="btn primary" onClick={() => setStep(Math.min(maxStep, step + 1))} disabled={curStep >= maxStep}>next →</button>
