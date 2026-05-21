@@ -30,6 +30,63 @@ const projects = (await getCollection('projects')).sort(
       {publications.map((pub) => <PublicationCard publication={pub} />)}
     </Section>
 
+    <!-- Teaching -->
+    <div class="max-w-content mx-auto px-6 md:px-10" style="max-width:52rem">
+      <div class="section-divider" />
+    </div>
+    <Section id="teaching" title="Teaching">
+      <!-- Courses -->
+      <div class="reveal">
+        <p class="teaching-sub">Courses</p>
+        <div>
+          <div class="teaching-row">
+            <span class="teaching-semester">WiSe 2024/25</span>
+            <div>
+              <div class="teaching-title">Project Computer Vision for Remote Sensing</div>
+              <div class="teaching-detail">Project supervision <span class="teaching-count">2 students</span></div>
+            </div>
+          </div>
+          <div class="teaching-row">
+            <span class="teaching-semester">SoSe 2025</span>
+            <div>
+              <div class="teaching-title">Image Processing and Learning for Earth Observation</div>
+              <div class="teaching-detail">Practical labs · Amazon deforestation mini-project <span class="teaching-count">50 students</span></div>
+            </div>
+          </div>
+          <div class="teaching-row">
+            <span class="teaching-semester">2025 Cremona</span>
+            <div>
+              <div class="teaching-title">EO Winter School — Lab on Self-Supervised Learning</div>
+              <div class="teaching-detail">Cremona, Italy <span class="teaching-count">15 students</span></div>
+            </div>
+          </div>
+          <div class="teaching-row">
+            <span class="teaching-semester">SoSe 2026</span>
+            <div>
+              <div class="teaching-title">Image Processing and Learning for Earth Observation</div>
+              <div class="teaching-detail">Practical labs · Amazon deforestation mini-project <span class="teaching-count">40 students</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Thesis supervision — hidden for now
+      <div class="reveal" style="margin-top:2.25rem">
+        <p class="teaching-sub">Thesis Supervision</p>
+        <div>
+          <div class="thesis-row">
+            <span class="thesis-student"><span class="teaching-semester">2026</span></span>
+            <p class="thesis-title-text">Analysis of Federated Prompt Learning Methods for Remote Sensing: Leveraging Token Relevance for Efficient Prompt Aggregation</p>
+          </div>
+          <div class="thesis-row">
+            <span class="thesis-student"><span class="teaching-semester">2026</span></span>
+            <p class="thesis-title-text">Towards Reliable Explanation Methods and Metrics for Remote Sensing Image Scene Classification</p>
+          </div>
+        </div>
+      </div>
+      */}
+    </Section>
+
     {projects.length > 0 && (
       <Fragment>
         <div class="max-w-content mx-auto px-6 md:px-10" style="max-width:52rem">
