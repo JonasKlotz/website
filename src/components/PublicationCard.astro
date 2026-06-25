@@ -32,7 +32,13 @@ const venueShort = venue.split(/[\s–—]+/).filter(Boolean).at(-1) ?? venue;
   <!-- Col 2: Figure or placeholder -->
   <div class="pub-figure-col">
     {image ? (
-      <img src={image} alt={`Figure for "${title}"`} class="pub-figure" loading="lazy" />
+      projectUrl ? (
+        <a href={projectUrl} target="_blank" rel="noopener" style="display:block;line-height:0">
+          <img src={image} alt={`Figure for "${title}"`} class="pub-figure" loading="lazy" style="cursor:pointer" />
+        </a>
+      ) : (
+        <img src={image} alt={`Figure for "${title}"`} class="pub-figure" loading="lazy" />
+      )
     ) : (
       <div class="pub-figure-placeholder">
         <div class="stripe-block" aria-hidden="true" />
