@@ -9,6 +9,8 @@ import { getCollection } from 'astro:content';
 
 const year = new Date().getFullYear();
 const publications = (await getCollection('publications')).sort((a, b) => {
+  const ao = a.data.order ?? 999, bo = b.data.order ?? 999;
+  if (ao !== bo) return ao - bo;
   if (b.data.year !== a.data.year) return b.data.year - a.data.year;
   return (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0);
 });

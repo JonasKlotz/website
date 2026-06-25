@@ -61,7 +61,7 @@ function App() {
         <div className="page">
           <div>
             <div className="brand">TAPAS</div>
-            <div className="small mt-1">An interactive companion to an anonymous submission.</div>
+            <div className="small mt-1">An interactive companion to our ECCV 2026 paper.</div>
           </div>
           <nav style={{display:"flex",gap:20,alignItems:"flex-end",fontFamily:"var(--mono)",fontSize:11,letterSpacing:"0.08em",color:"var(--ink-3)"}}>
             <a href="/impressum" style={{color:"var(--ink-3)",textDecoration:"none"}} onMouseEnter={e=>e.target.style.color="var(--accent)"} onMouseLeave={e=>e.target.style.color="var(--ink-3)"}>Impressum</a>
@@ -111,22 +111,8 @@ function AbstractSection({ inline }) {
       <div className="page">
         <div className="measure">
           <div className="kicker">Abstract</div>
-          <p style={{ fontSize: 20, lineHeight: 1.55 }}>
-             
-
-
-
-            <em></em> 
-          
-          </p>
           <p>
-            Sparse autoencoders (SAEs) are increasingly used to extract interpretable concepts from vision and vision language models, yet existing evaluation methods largely rely on proxy metrics or qualitative inspection rather than measuring semantic correspondence. We present a human-grounded evaluation framework that quantifies alignment between SAE latents and human-annotated concepts, without requiring user studies, and validate this matching through targeted attribute perturbations. To enable this intervention-style evaluation in vision, we construct synCUB and synCOCO, synthetic benchmarks of paired images that differ in exactly one attribute. We introduce Fully-Binary Matching Pursuit (FBMP), a coalition-based matching procedure that supports many-to-one mappings between SAE latents and annotated concepts, and consistently outperforms one-to-one baselines. For functional validation, we propose a Targeted Attribute Perturbation Alignment Score (TAPAScore), which tests whether matched concepts respond selectively and in the expected direction under targeted image-level attribute perturbations. Under sanity checks, our matching and TAPAScore are the only evaluated metrics that reliably distinguish trained SAEs from untrained ones. Across SAEs trained on CLIP and DINOv2 embeddings, we find that increased overcompleteness can reduce perturbation alignment, indicating a reduction in interpretability. Our evaluation framework suggests that moderate dictionary sizes provide the best trade-off, yielding the most interpretable SAEs. The code and datasets will be publicly available. <strong></strong>
-            and <strong></strong>, paired synthetic benchmarks where images differ in
-            exactly one attribute or object. We introduce <strong></strong>, a coalition-based
-            matching procedure supporting many-to-one mappings; and <strong></strong>,
-            which tests whether matched latents respond selectively under targeted perturbations.
-            Across CLIP and DINOv2 backbones, increasing overcompleteness can <em></em>
-            perturbation alignment — moderate dictionary sizes provide the best trade-off.
+            Sparse autoencoders (SAEs) are increasingly used to extract interpretable concepts from vision and vision language models, yet existing evaluation methods largely rely on proxy metrics or qualitative inspection rather than measuring semantic correspondence. We present a human-grounded evaluation framework that quantifies alignment between SAE latents and human-annotated concepts, without requiring user studies, and validate this matching through targeted attribute perturbations. To enable this intervention-style evaluation in vision, we construct synCUB and synCOCO, synthetic benchmarks of paired images that differ in exactly one attribute. We introduce Fully-Binary Matching Pursuit (FBMP), a coalition-based matching procedure that supports many-to-one mappings between SAE latents and annotated concepts, and consistently outperforms one-to-one baselines. For functional validation, we propose a Targeted Attribute Perturbation Alignment Score (TAPAScore), which tests whether matched concepts respond selectively and in the expected direction under targeted image-level attribute perturbations. Under sanity checks, our matching and TAPAScore are the only evaluated metrics that reliably distinguish trained SAEs from untrained ones. Across SAEs trained on CLIP and DINOv2 embeddings, we find that increased overcompleteness can reduce perturbation alignment, indicating a reduction in interpretability. Our evaluation framework suggests that moderate dictionary sizes provide the best trade-off, yielding the most interpretable SAEs. The <a href="https://github.com/JonasKlotz/sae-concept-eval">code</a> and <a href="#dataset">datasets</a> are publicly available.
           </p>
         </div>
       </div>
@@ -171,11 +157,12 @@ function BibSection() {
           <div className="kicker">Cite</div>
           <h2>BibTeX</h2>
           <pre style={{ fontFamily: "var(--mono)", fontSize: 12, lineHeight: 1.5, background: "var(--card)", border: "1px solid var(--rule)", padding: 16, borderRadius: 4, overflow: "auto" }}>
-{`@inproceedings{anonymous2026sae,
+{`@inproceedings{klotz2026evaluating,
   title     = {Evaluating the Interpretability of Sparse Autoencoders
                with Concept Annotations},
-  author    = {Anonymous},
-  booktitle = {Anonymous submission},
+  author    = {Jonas Klotz and Cassio Fraga Dantas and Pallavi Jain
+               and Diego Marcos and Beg{\\"{u}}m Demir},
+  booktitle = {European Conference on Computer Vision (ECCV)},
   year      = {2026}
 }`}
           </pre>

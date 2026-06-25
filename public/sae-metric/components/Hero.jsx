@@ -28,7 +28,7 @@ function HeroSection() {
     <section className="hero" id="overview" style={{ paddingBottom: 0, borderTop: 0 }}>
       <div className="page">
         <div className="measure">
-          <div className="kicker">A paper website · anonymous submission</div>
+          <div className="kicker">ECCV 2026</div>
           <h1>Evaluating the interpretability of <span className="accent">sparse autoencoders</span> with concept annotations.</h1>
           <p className="dim" style={{ fontSize: 21, lineHeight: 1.5, color: "var(--ink-2)", marginTop: 18 }}>
             We propose a human-grounded framework that quantifies how well an SAE&rsquo;s sparse latents
@@ -36,9 +36,9 @@ function HeroSection() {
             perturbations, whether those latents <em>causally</em> encode the concepts they match.
           </p>
           <div className="byline">
-            <span className="chip">Anonymous · double-blind</span>
-            <a href="#paper" className="chip">PDF</a>
-            <a href="#code" className="chip">Code (soon)</a>
+            <span className="chip">Klotz · Dantas · Jain · Marcos · Demir</span>
+            <a href="https://arxiv.org/abs/2606.24716" className="chip" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/JonasKlotz/sae-concept-eval" className="chip" target="_blank" rel="noopener">Code</a>
             <a href="#dataset" className="chip">synCUB / synCOCO</a>
           </div>
         </div>

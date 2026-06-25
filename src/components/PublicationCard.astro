@@ -5,7 +5,7 @@ interface Props {
   publication: CollectionEntry<'publications'>;
 }
 const { publication } = Astro.props;
-const { title, authors, venue, year, arxiv, venueUrl, code, bibtex, abstract, image } = publication.data;
+const { title, authors, venue, year, arxiv, venueUrl, code, bibtex, abstract, image, projectUrl } = publication.data;
 
 const hasSharedFirst = authors.some(a => a.includes('†'));
 
@@ -66,6 +66,9 @@ const venueShort = venue.split(/[\s–—]+/).filter(Boolean).at(-1) ?? venue;
       )}
       {code && (
         <a href={code} target="_blank" rel="noopener" class="link-btn no-anim">Code</a>
+      )}
+      {projectUrl && (
+        <a href={projectUrl} target="_blank" rel="noopener" class="link-btn no-anim">Project</a>
       )}
       {bibtex && (
         <>
