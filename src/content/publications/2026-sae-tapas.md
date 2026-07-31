@@ -10,4 +10,5 @@ order: 0
 image: "/images/papers/sae-metric.png"
 abstract: "We present a human-grounded framework for evaluating sparse autoencoders using concept annotations and targeted image perturbations. We introduce FBMP for coalition-based matching, synCUB/synCOCO benchmarks, and TAPAScore for causal validation."
 featured: true
+oral: true
 ---

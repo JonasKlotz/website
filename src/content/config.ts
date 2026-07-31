@@ -15,6 +15,7 @@ const publications = defineCollection({
     abstract: z.string().optional(),
     image: z.string().optional(),
     featured: z.boolean().default(false),
+    oral: z.boolean().default(false),
     order: z.number().optional(),
   }),
 });
