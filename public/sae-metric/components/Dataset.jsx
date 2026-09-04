@@ -34,6 +34,14 @@ function DatasetSection() {
             Browse below. Failure modes — the kind you usually see hidden in an appendix — are kept
             on purpose; click into them.
           </p>
+          <div className="mt-2" style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <a href="https://huggingface.co/datasets/jokl/syncub" className="btn" target="_blank" rel="noopener">
+              ↓ Download synCUB
+            </a>
+            <a href="https://huggingface.co/datasets/jokl/syncoco" className="btn" target="_blank" rel="noopener">
+              ↓ Download synCOCO
+            </a>
+          </div>
         </div>
 
         <div className="wide mt-3">
